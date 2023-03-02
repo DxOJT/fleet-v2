@@ -8,7 +8,7 @@ import router from "./routes";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://snapmed.hasura.app/v1/graphql",
+  uri: process.env.HASURA_HTTP_URL,
   cache: new InMemoryCache(),
 });
 

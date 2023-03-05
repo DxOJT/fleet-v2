@@ -3,6 +3,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { createClient } from 'graphql-ws';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { WebSocketLink } from "@apollo/client/link/ws";
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { setContext } from "@apollo/client/link/context";
 
 const authLink = setContext((_, { headers }) => {
@@ -16,28 +17,39 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const httpLink = new HttpLink({
-    uri: process.env.HASURA_HTTP_URL,
+    uri: import.meta.env.VITE_REACT_APP_HASURA_HTTP_URL,
 });
 
-const wsLink = new GraphQLWsLink(createClient({
-    url: process.env.HASURA_WS_URL,
-    on: {
-        connected: () => console.log("Connected client!"),
-        closed: () => console.log("Closed ws-connection!"),
-    },
-    reconnect: true,
-    connectionParams: () => {
-        // Note: getSession() is a placeholder function created by you
-        const session = localStorage.getItem("Token");
-        if (!session) {
-            return {};
-        }
-        return {
-            Authorization: `Bearer ${session}`,
-        };
-    },
+// const wsLink = new GraphQLWsLink(createClient({
+//     url: import.meta.env.VITE_REACT_APP_HASURA_WS_URL,
+    // on: {
+    //     connected: () => console.log("Connected client!"),
+    //     closed: () => console.log("Closed ws-connection!"),
+    // },
+    // reconnect: true,
+    // connectionParams: Json.Encode.object_([("headers", headers)]);,
+    // connectionParams: () => {
+    //     // Note: getSession() is a placeholder function created by you
+    //     const session = localStorage.getItem("Token");
+    //     if (!session) {
+    //         return {};
+    //     }
+    //     return Json.Encode.object_([("headers", headers)]);{
+    //         Authorization: `Bearer ${session}`,
+    //     };
+    // },
 
-}));
+// }));
+const wsLink = new WebSocketLink(
+    new SubscriptionClient(import.meta.env.VITE_REACT_APP_HASURA_WS_URL, {
+      reconnect: true,
+      connectionParams: {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("Token")}`
+        }
+      }
+    })
+  );
 // const wsLink = new WebSocketLink({
 //     uri: 'ws://3.1.204.87:8080/v1/graphql',
 //     options: {

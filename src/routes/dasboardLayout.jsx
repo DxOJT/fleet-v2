@@ -89,12 +89,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       {...rest}
     >
       <Flex alignItems="center" mx="8" justifyContent="space-between">
-        <Box w={"100%"}  style={{ 
-          display:'flex',
-          justifyContent:'center',
-          alignItems:'center',
-          flexDirection:'column'
-         }}>
+        <Box w={"100%"}  className='flex items-center justify-center flex-col'>
           <Image src='/fleettaxilogo.png' boxSize='110px' alt="logo" mt={"-5px"}/>
           <Text mt={"-15px"} as='b' fontSize='lg'>Fleet Management</Text>
         </Box>

@@ -20,7 +20,8 @@ import {
   MenuItem,
   MenuList,
   useColorMode,
-  Button
+  Button,
+  Image
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -87,10 +88,16 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h="full"
       {...rest}
     >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+      <Flex alignItems="center" mx="8" justifyContent="space-between">
+        <Box w={"100%"}  style={{ 
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center',
+          flexDirection:'column'
+         }}>
+          <Image src='/fleettaxilogo.png' boxSize='110px' alt="logo" mt={"-5px"}/>
+          <Text mt={"-15px"} as='b' fontSize='lg'>Fleet Management</Text>
+        </Box>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (

@@ -9,7 +9,7 @@ const LoginPage = () => {
                 <CardBody minWidth="550px">
                     <Text>Username</Text> 
                     <Input placeholder='Username' type='email' required/>
-                    <Text visibility="hidden">Incorrect Username</Text>
+                    <Text visibility="hidden">Incorrect WOWwweee</Text>
                     <Text>Password</Text> 
                     <Input placeholder='Password' type='password' required/>
                     <Text visibility="hidden">Incorrect Password</Text>

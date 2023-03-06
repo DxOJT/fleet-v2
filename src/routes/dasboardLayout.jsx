@@ -36,13 +36,11 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 
 const LinkItems = [
-  { name: "Home", icon: FiHome, to: "/some" },
+  { name: "Dashboard", icon: FiHome, to: "/" },
   { name: "Trending", icon: FiTrendingUp, to: "#" },
   { name: "Explore", icon: FiCompass, to: "#" },
   { name: "Favourites", icon: FiStar, to: "#" },
   { name: "Settings", icon: FiSettings, to: "#" },
-  { name: "Logout", icon: FiSettings, to: "login" },
-
 ];
 
 import { Outlet } from "react-router-dom";

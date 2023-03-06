@@ -31,6 +31,7 @@ const LoginPage = () => {
             isInvalid={emailError}
             onChange={(e) => {
               setInputEmail(e.target.value);
+              setEmailError(false)
             }}
           />
           <Text visibility={emailError ? "visible" : "hidden"} color="red">
@@ -45,12 +46,24 @@ const LoginPage = () => {
             isInvalid={passwordError}
             onChange={(e) => {
               setInputPassword(e.target.value);
+              setPasswordError(false)
             }}
           />
           <Text visibility={passwordError ? "visible" : "hidden"} color="red">
             Incorrect Password
           </Text>
-          <Button colorScheme="orange" width="100%">
+          <Button colorScheme="orange" width="100%" onClick={() => {
+            if (email !== inputEmail) {
+                setEmailError(true)
+            } else {
+                setEmailError(false)
+            }
+            if (password !== inputPassword) {
+                setPasswordError(true)
+            } else {
+                setPasswordError(false)
+            }
+          }}>
             Sign Up
           </Button>
         </CardBody>

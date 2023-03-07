@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [passwordError, setPasswordError] = useState(false);
 
   const handleSubmit =() => {
-    if (email !== inputEmail && password === inputPassword) {
+    if (email !== inputEmail) {
       setEmailError(true)
     } else {
         setEmailError(false)
@@ -48,7 +48,7 @@ const LoginPage = () => {
             onChange={(e) => {onchageEmail(e.target.value)}}
           />
           <Text visibility={emailError ? "visible" : "hidden"} color="red">
-            Incorrect Username
+            User not found
           </Text>
           <Text>Password</Text>
           <Input

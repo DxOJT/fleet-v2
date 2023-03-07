@@ -14,11 +14,14 @@ export default createBrowserRouter([
       element: <DashboardLayout/>,
       children:[
         {
-          path: "/",
-          element: <Dashboard/>,
+          path: "/App",
+          element: <App/>,
         },
 
-       
+        {
+          path: "/",
+          element:  <  Dashboard></Dashboard>
+        },
 
 
       ]

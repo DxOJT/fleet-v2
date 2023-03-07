@@ -8,17 +8,33 @@ const LoginPage = () => {
   const [inputPassword, setInputPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  const handleSubmit =() => {
+    if (email !== inputEmail && password === inputPassword) {
+      setEmailError(true)
+    } else {
+        setEmailError(false)
+    }
+    if (password !== inputPassword && email === inputEmail) {
+        setPasswordError(true)
+    } else {
+        setPasswordError(false)
+    } 
+  }
+
+  const onchageEmail = (email) => {
+    setInputEmail(email);
+    setEmailError(false)
+  }
+  const onchangePassword = (password) => {
+    setInputPassword(password);
+    setPasswordError(false)
+  }
   return (
-    <Box
-      minH="100vh"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      bg={"#2D3748"}
-    >
-      <Card alignItems="center" borderColor="orange" borderWidth="2px">
+    <Box className="flex min-h-screen justify-center items-center" bg="#2D3748">
+      <Card className="flex items-center" borderColor="orange" borderWidth="2px">
         <Image src="/fleet.png" boxSize="100px" />
-        <Text fontSize="30px" fontWeight="bold">
+        <Text className="font-bold text-3xl">
           Fleet Management
         </Text>
         <CardBody minWidth="550px">
@@ -29,10 +45,7 @@ const LoginPage = () => {
             required
             value={inputEmail}
             isInvalid={emailError}
-            onChange={(e) => {
-              setInputEmail(e.target.value);
-              setEmailError(false)
-            }}
+            onChange={(e) => {onchageEmail(e.target.value)}}
           />
           <Text visibility={emailError ? "visible" : "hidden"} color="red">
             Incorrect Username
@@ -44,26 +57,12 @@ const LoginPage = () => {
             required
             value={inputPassword}
             isInvalid={passwordError}
-            onChange={(e) => {
-              setInputPassword(e.target.value);
-              setPasswordError(false)
-            }}
+            onChange={(e) => {onchangePassword(e.target.value)}}
           />
           <Text visibility={passwordError ? "visible" : "hidden"} color="red">
             Incorrect Password
           </Text>
-          <Button colorScheme="orange" width="100%" onClick={() => {
-            if (email !== inputEmail) {
-                setEmailError(true)
-            } else {
-                setEmailError(false)
-            }
-            if (password !== inputPassword) {
-                setPasswordError(true)
-            } else {
-                setPasswordError(false)
-            }
-          }}>
+          <Button colorScheme="orange" width="100%" onClick={() => {handleSubmit()}}>
             Sign Up
           </Button>
         </CardBody>

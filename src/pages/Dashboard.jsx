@@ -4,6 +4,9 @@ import { Card,  Center, Flex, Text } from "@chakra-ui/react"
 export const Dashboard  = () =>  {
 
 
+    
+
+
     const  cardLayout  = {
       width: "200px",
       height: "80px",
@@ -14,6 +17,9 @@ export const Dashboard  = () =>  {
       flexWrap :"nowrap"
 
     }
+
+    
+
 
      const  cardFont= {
         fontWeight:"bold",
@@ -38,7 +44,7 @@ return(
     
       
       
-        <Flex  className="flex justify-center"   rowGap={"50px"}   gap={"24px"} direction={"row"}  flexWrap="wrap" > 
+        <Flex  className="flex justify-center   "     rowGap={"50px"}   gap={"24px"} direction={"row"}  flexWrap="wrap" > 
           
             {sampledata.map((value)=>(
 

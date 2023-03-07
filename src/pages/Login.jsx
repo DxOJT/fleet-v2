@@ -21,7 +21,6 @@ const LoginPage = () => {
         setPasswordError(false)
     } 
   }
-
   const onchageEmail = (email) => {
     setInputEmail(email);
     setEmailError(false)
@@ -32,19 +31,18 @@ const LoginPage = () => {
   }
   return (
     <Box className="flex min-h-screen justify-center items-center" bg="#2D3748">
-      <Card className="flex items-center" borderColor="orange" borderWidth="2px">
+      <Card className="flex items-center" borderColor="orange" borderWidth="2px" minWidth="25vw">
         <Image src="/fleet.png" boxSize="100px" />
         <Text className="font-bold text-3xl">
           Fleet Management
         </Text>
-        <CardBody minWidth="550px">
+        <CardBody minWidth="inherit">
           <Text>Username</Text>
           <Input
             placeholder="Username"
             type="email"
             required
             value={inputEmail}
-            isInvalid={emailError}
             onChange={(e) => {onchageEmail(e.target.value)}}
           />
           <Text visibility={emailError ? "visible" : "hidden"} color="red">
@@ -56,7 +54,6 @@ const LoginPage = () => {
             type="password"
             required
             value={inputPassword}
-            isInvalid={passwordError}
             onChange={(e) => {onchangePassword(e.target.value)}}
           />
           <Text visibility={passwordError ? "visible" : "hidden"} color="red">

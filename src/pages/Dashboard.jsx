@@ -1,4 +1,5 @@
 import { Card,  Center, Flex, Text } from "@chakra-ui/react"
+import CardComponent from "../components/CardComponent.js"
 
 
 export const Dashboard  = () =>  {
@@ -47,16 +48,10 @@ return(
     
       
       
-        <Flex  className="flex justify-center   "        gap={"10px"} direction={"row"}  flexWrap="wrap" > 
+        <div  className="flex justify-center   gap-5  flex-wrap  " > 
           
             {sampledata.map((value)=>(
-
-
-            <Card    style={cardLayout}  key={value.id}>
-            <Center   height={"70%"} > < Text  style={cardFont} className ={" text-9xl mb-1 "  }   > {value.text1}</Text></Center>
-            <Center>  <Text  fontSize={"10px" } fontWeight={"bold"}   p={"2px"} > {value.text2}</Text> </Center> 
-            </Card>
-
+               <CardComponent value={value}/>
 
             ))}
 
@@ -71,7 +66,7 @@ return(
             
 
         
-        </Flex>
+        </div>
 
 
 

@@ -20,7 +20,7 @@ import {
   MenuItem,
   MenuList,
   useColorMode,
-  Button,
+  Button,,
   Image
 } from "@chakra-ui/react";
 import {
@@ -33,8 +33,7 @@ import {
   FiBell,
   FiChevronDown,
 } from "react-icons/fi";
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const LinkItems = [
   { name: "Dashboard", icon: FiHome, to: "/" },
@@ -44,7 +43,7 @@ const LinkItems = [
   { name: "Settings", icon: FiSettings, to: "#" },
 ];
 
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 export default function SidebarWithHeader({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -70,7 +69,7 @@ export default function SidebarWithHeader({ children }) {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <Outlet/>
+        <Outlet />
       </Box>
     </Box>
   );
@@ -183,9 +182,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
           aria-label="open menu"
           icon={<FiBell />}
         />
-         <Button onClick={toggleColorMode}>
-            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-          </Button>
+        <Button onClick={toggleColorMode}>
+          {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+        </Button>
         <Flex alignItems={"center"}>
           <Menu>
             <MenuButton
@@ -224,7 +223,14 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  localStorage.removeItem(import.meta.env.VITE_REACT_APP_TOKEN);
+                  window.location = "/";
+                }}
+              >
+                Sign out
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

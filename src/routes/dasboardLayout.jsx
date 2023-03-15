@@ -20,7 +20,8 @@ import {
   MenuItem,
   MenuList,
   useColorMode,
-  Button,
+  Button,,
+  Image
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -35,7 +36,7 @@ import {
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const LinkItems = [
-  { name: "Home", icon: FiHome, to: "/" },
+  { name: "Dashboard", icon: FiHome, to: "/" },
   { name: "Trending", icon: FiTrendingUp, to: "#" },
   { name: "Explore", icon: FiCompass, to: "#" },
   { name: "Favourites", icon: FiStar, to: "#" },
@@ -47,7 +48,7 @@ import { Navigate, Outlet } from "react-router-dom";
 export default function SidebarWithHeader({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box  minH="100vh"  /*bg={useColorModeValue("gray.100", "gray.900")}*/  bg={"#718096"} >
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
@@ -86,10 +87,16 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h="full"
       {...rest}
     >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+      <Flex alignItems="center" mx="8" justifyContent="space-between">
+        <Box w={"100%"}  style={{ 
+          display:'flex',
+          justifyContent:'center',
+          alignItems:'center',
+          flexDirection:'column'
+         }}>
+          <Image src='/fleettaxilogo.png' boxSize='110px' alt="logo" mt={"-5px"}/>
+          <Text mt={"-15px"} as='b' fontSize='lg'>Fleet Management</Text>
+        </Box>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (

@@ -5,6 +5,7 @@ import DashboardLayout from "./routes/dasboardLayout";
 
 //pages
 import App from "./pages/App.jsx";
+import { Dashboard } from "./pages/Dashboard";
 import LoginPage from "./pages/Login";
 
 export default createBrowserRouter([

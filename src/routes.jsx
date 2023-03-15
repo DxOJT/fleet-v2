@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 //Laayouts
 import DashboardLayout from "./routes/dasboardLayout";
@@ -7,20 +7,29 @@ import DashboardLayout from "./routes/dasboardLayout";
 import App from "./pages/App.jsx";
 import LoginPage from "./pages/Login";
 
-
 export default createBrowserRouter([
-    {
-      path: "/",
-      element: <DashboardLayout/>,
-      children:[
-        {
-          path: "/",
-          element: <App/>,
-        },
-      ]
-    },
-    {
-        path: "/login",
-        element: <LoginPage/>,
-    },
+  {
+    path: "/",
+    element:
+      localStorage.getItem(import.meta.env.VITE_REACT_APP_TOKEN) == null ? (
+        <Navigate to={"/login"} />
+      ) : (
+        <DashboardLayout />
+      ),
+    children: [
+      {
+        path: "/",
+        element: <App />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element:
+      localStorage.getItem(import.meta.env.VITE_REACT_APP_TOKEN) == null ? (
+        <LoginPage />
+      ) : (
+        <Navigate to={"/"} />
+      ),
+  },
 ]);

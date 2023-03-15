@@ -20,7 +20,7 @@ import {
   MenuItem,
   MenuList,
   useColorMode,
-  Button,,
+  Button,
   Image
 } from "@chakra-ui/react";
 import {

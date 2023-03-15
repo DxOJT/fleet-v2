@@ -36,8 +36,8 @@ import {
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const LinkItems = [
-  { name: "Dashboard", icon: FiHome, to: "/Dashboard" },
-  { name: "Trending", icon: FiTrendingUp, to: "/" },
+  { name: "Dashboard", icon: FiHome, to: "/" },
+  { name: "Trending", icon: FiTrendingUp, to: "#" },
   { name: "Explore", icon: FiCompass, to: "#" },
   { name: "Favourites", icon: FiStar, to: "#" },
   { name: "Settings", icon: FiSettings, to: "#" },

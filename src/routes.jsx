@@ -18,9 +18,10 @@ export default createBrowserRouter([
         <DashboardLayout />
       ),
     children: [
+     
       {
         path: "/",
-        element: <App />,
+        element: <Dashboard/>,
       },
     ],
   },

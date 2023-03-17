@@ -16,13 +16,46 @@ import {
   FiStar,
   FiSettings,
 } from "react-icons/fi";
+import { IoHome, } from "react-icons/io5";
+import { FaUserShield,FaUserFriends,FaRegBuilding,FaCarSide ,FaUserInjured,FaFileInvoice,FaTaxi,FaWarehouse,FaRegHandshake,FaGasPump} from "react-icons/fa";
+import { HiOutlineUsers ,   } from "react-icons/hi";
+
+
+
 
 const LinkItems = [
-  { name: "Dashboard", icon: FiHome, to: "/" },
-  { name: "Trending", icon: FiTrendingUp, to: "#" },
-  { name: "Explore", icon: FiCompass, to: "#" },
-  { name: "Favourites", icon: FiStar, to: "#" },
-  { name: "Settings", icon: FiSettings, to: "#" },
+  { name: "Dashboard", icon: IoHome, to: "/" },
+  { name: "Owner", icon: FaUserShield, to: "#" },
+  { name: "Employee", icon: FaUserFriends, to: "#", subLinks:[
+    { name: "Driver", icon: FaUserFriends, to: "#" },
+    { name: "Gatekeeper", icon: HiOutlineUsers, to: "#" },
+  ] },
+  { name: "Company", icon: FaRegBuilding , to: "#" , subLinks:[
+ 
+  ]  }
+  ,
+  { name: "Vehicles", icon:FaCarSide, to: "#" , subLinks:[
+ 
+  ]  },
+
+  { name: "Insurance", icon: FaUserInjured, to: "#" },
+  { name: "Inventory", icon: FaFileInvoice, to: "#" , subLinks:[
+ 
+  ]  },
+  { name: "Taxi", icon: FaTaxi, to: "#" },
+  { name: "Garage", icon: FaWarehouse, to: "#" },
+
+  { name: "Transaction", icon:FaRegHandshake, to: "#" , subLinks:[
+ 
+  ]  },
+  { name: "Fuel", icon: FaGasPump, to: "#" },
+
+  { name: "Settings ", icon: FiSettings, to: "#" , subLinks:[
+ 
+  ]  },
+
+
+
 ];
 
 import NavItem from "./NavItem";
@@ -53,7 +86,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
 
             <HStack 
             ml={'-10'  }
-            mb ={'50'}
+            mb ={'5'}
             >
 
             <Image src='/fleettaxilogo.png' boxSize='100px' alt="logo" mr={-15} />
@@ -68,8 +101,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
           <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
         </Flex>
         {LinkItems.map((link) => (
-          <NavItem    key={link.name} icon={link.icon} to={link.to}  ml={'25px'}  >
-            <Text  fontWeight={'bold'} > {link.name} </Text> 
+          <NavItem key={link.name} icon={link.icon} to={link.to} subLinks={link.subLinks}>
+            {link.name}
           </NavItem>
         ))}
       </Box>

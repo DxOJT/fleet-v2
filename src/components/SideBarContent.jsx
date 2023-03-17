@@ -5,7 +5,9 @@ import {
   Flex,
   useColorModeValue,
   Text,
-  Image
+  Image,
+  HStack,
+  Center
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -35,23 +37,39 @@ const SidebarContent = ({ onClose, ...rest }) => {
         w={{ base: "full", md: 60 }}
         pos="fixed"
         h="full"
+        
+        alignItems={'center'}
         {...rest}
       >
         <Flex alignItems="center" mx="8" justifyContent="space-between">
+
+          
           <Box w={"100%"}  style={{ 
             display:'flex',
             justifyContent:'center',
             alignItems:'center',
             flexDirection:'column'
            }}>
-            <Image src='/fleettaxilogo.png' boxSize='110px' alt="logo" mt={"-5px"}/>
-            <Text mt={"-15px"} as='b' fontSize='lg'>Fleet Management</Text>
+
+            <HStack 
+            ml={'-10'  }
+            mb ={'50'}
+            >
+
+            <Image src='/fleettaxilogo.png' boxSize='100px' alt="logo" mr={-15} />
+            <Text  as='b' fontSize='lg'  textAlign={'center'}  >Fleet Management</Text>
+
+            </HStack>
           </Box>
+
+          
+
+
           <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
         </Flex>
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon} to={link.to}>
-            {link.name}
+          <NavItem    key={link.name} icon={link.icon} to={link.to}  ml={'25px'}  >
+            <Text  fontWeight={'bold'} > {link.name} </Text> 
           </NavItem>
         ))}
       </Box>

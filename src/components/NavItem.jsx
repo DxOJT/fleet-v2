@@ -59,6 +59,7 @@ const NavItem = ({ icon, to, children, subLinks, ...rest }) => {
             {
               subLinks.map((sub)=>(
               <Link
+              key={sub.name}
               href={sub.to}
               style={{ textDecoration: "none" }}
               _focus={{ boxShadow: "none" }}

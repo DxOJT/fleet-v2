@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-
+import DriverList from "./pages/DriverList";
 //Laayouts
 import DashboardLayout from "./routes/dasboardLayout";
 
@@ -22,6 +22,11 @@ export default createBrowserRouter([
       {
         path: "/",
         element: <Dashboard/>,
+      },
+
+      {
+        path: "/driverList",
+        element: <DriverList/>,
       },
     ],
   },

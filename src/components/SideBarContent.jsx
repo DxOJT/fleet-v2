@@ -26,31 +26,31 @@ import { HiOutlineUsers ,   } from "react-icons/hi";
 const LinkItems = [
   { name: "Dashboard", icon: IoHome, to: "/" },
   { name: "Owner", icon: FaUserShield, to: "#" },
-  { name: "Employee", icon: FaUserFriends, to: "#", subLinks:[
+  { name: "Employee", icon: FaUserFriends,  subLinks:[
     { name: "Driver", icon: FaUserFriends, to: "#" },
     { name: "Gatekeeper", icon: HiOutlineUsers, to: "#" },
   ] },
-  { name: "Company", icon: FaRegBuilding , to: "#" , subLinks:[
+  { name: "Company", icon: FaRegBuilding ,  subLinks:[
  
   ]  }
   ,
-  { name: "Vehicles", icon:FaCarSide, to: "#" , subLinks:[
+  { name: "Vehicles", icon:FaCarSide, subLinks:[
  
   ]  },
 
   { name: "Insurance", icon: FaUserInjured, to: "#" },
-  { name: "Inventory", icon: FaFileInvoice, to: "#" , subLinks:[
+  { name: "Inventory", icon: FaFileInvoice,  subLinks:[
  
   ]  },
   { name: "Taxi", icon: FaTaxi, to: "#" },
   { name: "Garage", icon: FaWarehouse, to: "#" },
 
-  { name: "Transaction", icon:FaRegHandshake, to: "#" , subLinks:[
+  { name: "Transaction", icon:FaRegHandshake,  subLinks:[
  
   ]  },
   { name: "Fuel", icon: FaGasPump, to: "#" },
 
-  { name: "Settings ", icon: FiSettings, to: "#" , subLinks:[
+  { name: "Settings ", icon: FiSettings,  subLinks:[
  
   ]  },
 

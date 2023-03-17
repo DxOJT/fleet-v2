@@ -18,6 +18,11 @@ import {
 const LinkItems = [
   { name: "Dashboard", icon: FiHome, to: "/" },
   { name: "Trending", icon: FiTrendingUp, to: "#" },
+  { name: "Settings", icon: FiSettings, to: "#", subLinks:[
+    { name: "Explore", icon: FiCompass, to: "#" },
+    { name: "Favourites", icon: FiStar, to: "#" },
+    { name: "Settings", icon: FiSettings, to: "#" }
+  ] },
   { name: "Explore", icon: FiCompass, to: "#" },
   { name: "Favourites", icon: FiStar, to: "#" },
   { name: "Settings", icon: FiSettings, to: "#" },
@@ -50,7 +55,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
           <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
         </Flex>
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon} to={link.to}>
+          <NavItem key={link.name} icon={link.icon} to={link.to} subLinks={link.subLinks}>
             {link.name}
           </NavItem>
         ))}

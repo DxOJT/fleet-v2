@@ -12,7 +12,7 @@ import SidebarContent from "../components/SideBarContent";
 export default function SidebarWithHeader({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box  minH="100vh"  /*bg={useColorModeValue("gray.100", "gray.900")}*/  bg={"#718096"} >
+    <Box  minH="100vh"  /*bg={useColorModeValue("gray.100", "gray.900")}*/  bg={"#EAEFF6"} >
       <SidebarContent
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}

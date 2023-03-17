@@ -44,15 +44,6 @@ const Header = ({ onOpen, ...rest }) => {
           icon={<FiMenu />}
         />
   
-        <Text
-          display={{ base: "flex", md: "none" }}
-          fontSize="2xl"
-          fontFamily="monospace"
-          fontWeight="bold"
-        >
-          Logo
-        </Text>
-  
         <HStack spacing={{ base: "0", md: "6" }}>
           <IconButton
             size="lg"

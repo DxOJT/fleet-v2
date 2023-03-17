@@ -52,8 +52,8 @@ const NavItem = ({ icon, to, children, subLinks, ...rest }) => {
           </h2>
           <AccordionPanel 
           p={0}
-          borderY='1px'
-          mt={3}
+          borderY={subLinks.length===0?0:'1px'}
+          mt={subLinks.length===0?0:0}
           borderColor={'orange'}
           >
             {

@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 
 const NavItem = ({ icon, to, children, subLinks, ...rest }) => {
-  console.log(subLinks)
   if(subLinks){
     return(
       <Accordion allowToggle>

@@ -1,15 +1,22 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input, Text, Image, Box, useToast } from "@chakra-ui/react";
 import { post } from "../lib/axios.cjs";
-import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+
 const LoginPage = () => {
+  const [sample, setSample] = useState(false);
+
+  const { login } = useAuth();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [sample, setSample] = useState(false);
+
   const toast = useToast();
+
   const onSubmit = async (data) => {
     setSample(false);
     try {
@@ -17,21 +24,16 @@ const LoginPage = () => {
         email: data.Username,
         password: data.Password,
       });
-      if (response.data.token) { 
+      if (response.data.token) {
         toast({
           title: `Valid Credentials`,
           status: "success",
           position: "bottom-right",
           isClosable: true,
         });
-        localStorage.setItem(
-          import.meta.env.VITE_REACT_APP_TOKEN,
-          response.data.token
-        );
-        window.location = "/";
+        login(response.data.token);
       }
     } catch (error) {
-      console.log(error);
       setSample(true);
       toast({
         title: `Invalid Username or Password`,

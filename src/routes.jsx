@@ -1,37 +1,53 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter, useRouteError } from "react-router-dom";
 
-//Laayouts
-import DashboardLayout from "./routes/dasboardLayout";
+//route protect
+import { ProtectedLayout, HomeLayout } from "./utils/routeGuard";
+import { RoleGuardLayout } from "./utils/roleGuard";
+
+//Layouts
+import DashboardLayout from "./layout/dasboardLayout";
 
 //pages
-import App from "./pages/App.jsx";
-import { Dashboard } from "./pages/Dashboard";
 import LoginPage from "./pages/Login";
+
+//routes
+import adminRoutes from "./routes/adminRoutes";
+
 
 export default createBrowserRouter([
   {
+    // private routes
     path: "/",
-    element:
-      localStorage.getItem(import.meta.env.VITE_REACT_APP_TOKEN) == null ? (
-        <Navigate to={"/login"} />
-      ) : (
-        <DashboardLayout />
-      ),
+    element: <ProtectedLayout />,
     children: [
-     
       {
         path: "/",
-        element: <Dashboard/>,
+        element: (
+          <RoleGuardLayout>
+            <DashboardLayout />
+          </RoleGuardLayout>
+        ),
+        children: [
+          {
+            //admin routes
+            path: "/admin",
+            children: adminRoutes,
+          },
+        ],
       },
     ],
   },
   {
-    path: "/login",
-    element:
-      localStorage.getItem(import.meta.env.VITE_REACT_APP_TOKEN) == null ? (
-        <LoginPage />
-      ) : (
-        <Navigate to={"/"} />
-      ),
+    // public routes
+    path: "/",
+    element: <HomeLayout />,
+    children: [
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+    ],
   },
 ]);
+
+

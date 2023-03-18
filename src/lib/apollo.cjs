@@ -40,16 +40,16 @@ const httpLink = new HttpLink({
     // },
 
 // }));
-const wsLink = new WebSocketLink(
-    new SubscriptionClient(import.meta.env.VITE_REACT_APP_HASURA_WS_URL, {
-      reconnect: true,
-      connectionParams: {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("Token")}`
-        }
-      }
-    })
-  );
+// const wsLink = new WebSocketLink(
+//     new SubscriptionClient(import.meta.env.VITE_REACT_APP_HASURA_WS_URL, {
+//       reconnect: true,
+//       connectionParams: {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem("Token")}`
+//         }
+//       }
+//     })
+//   );
 // const wsLink = new WebSocketLink({
 //     uri: 'ws://3.1.204.87:8080/v1/graphql',
 //     options: {

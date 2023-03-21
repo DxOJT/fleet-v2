@@ -21,9 +21,10 @@ import {
   FiBell,
   FiChevronDown,
 } from "react-icons/fi";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { useAuth } from "../hooks/useAuth";
+
 const Header = ({ onOpen, ...rest }) => {
-    const { colorMode, toggleColorMode } = useColorMode();
+    const { logout } = useAuth();
     return (
       <Flex
         ml={{ base: 0, md: 60 }}
@@ -44,15 +45,6 @@ const Header = ({ onOpen, ...rest }) => {
           icon={<FiMenu />}
         />
   
-        <Text
-          display={{ base: "flex", md: "none" }}
-          fontSize="2xl"
-          fontFamily="monospace"
-          fontWeight="bold"
-        >
-          Logo
-        </Text>
-  
         <HStack spacing={{ base: "0", md: "6" }}>
           <IconButton
             size="lg"
@@ -60,9 +52,6 @@ const Header = ({ onOpen, ...rest }) => {
             aria-label="open menu"
             icon={<FiBell />}
           />
-          <Button onClick={toggleColorMode}>
-            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          </Button>
           <Flex alignItems={"center"}>
             <Menu>
               <MenuButton
@@ -102,10 +91,7 @@ const Header = ({ onOpen, ...rest }) => {
                 <MenuItem>Billing</MenuItem>
                 <MenuDivider />
                 <MenuItem
-                  onClick={() => {
-                    localStorage.removeItem(import.meta.env.VITE_REACT_APP_TOKEN);
-                    window.location = "/";
-                  }}
+                  onClick={logout}
                 >
                   Sign out
                 </MenuItem>

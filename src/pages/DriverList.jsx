@@ -1,57 +1,108 @@
 import { Box, Button, Flex, HStack, Input, Text } from "@chakra-ui/react";
 import { ClassNames } from "@emotion/react";
 import ComponentTable from "../components/ComponentTable";
+import MobileResponsiveView from "../components/MobileResponsiveView";
 
 const DriverList = () => {
   const driverData = [
     {
-      name: "Segan Abayo",
+      id: 1,
+      name: "Sonny Boy Fuenteblanca",
       DateOflicense: "12/24/2023",
-      Action: "View profile",
+  
     },
     {
-      name: "Segan Abayo",
+      id:2,
+      name: "Cedric Franz Candido",
       DateOflicense: "12/24/2023",
-      Action: "View profile",
+   
     },
     {
+      id:3,
+      name: "Sean Camogues",
+      DateOflicense: "12/24/2023",
+     
+    },{
+      id: 4,
+      name: "Reyjan Cuyog",
+      DateOflicense: "12/24/2023",
+  
+    },
+    {
+      id:5,
+      name: "Eunice Balmes Mabaho",
+      DateOflicense: "12/24/2023",
+   
+    },
+    {
+      id:6,
+      name: "ggggggggggg",
+      DateOflicense: "12/24/2023",
+     
+    },{
+      id: 7,
+      name: "fffffffff",
+      DateOflicense: "12/24/2023",
+  
+    },
+    {
+      id:8,
+      name: "jjjjjjjjjjj",
+      DateOflicense: "12/24/2023",
+   
+    },
+    {
+      id:9,
+      name: "nnnnnnnnnnnn",
+      DateOflicense: "12/24/2023",
+     
+    },{
+      id: 10,
+      name: "Seganwqeqeqwe Abayo",
+      DateOflicense: "12/24/2023",
+  
+    },
+    {
+      id:11,
       name: "Segan Abayo",
       DateOflicense: "12/24/2023",
-      Action: "View profile",
+   
     },
+   
+
+    
   ];
   return (
     <>
       <Box mt={"5"}>
-        <HStack className="flex justify-between">
+        <Box className= " flex flex-col md:flex-row justify-between bg-white  m-6 p-5 rounded-x md:items-center">
           <Text
             className=" font-bold"
-            fontSize={{ base: 15, md: 23 }}
-            ml={{ base: 7, md: 0 }}
+            fontSize={{ base: 35, md: 23 }}
+            ml={{ base: 0, md: 6 }}
           >
-            {" "}
-            Driver List{" "}
+            Driver List
           </Text>
 
-          <div>
-            <Input w={{ base: 20, md: 60 }} mr={"5"} placeholder="Search" />
+          <div className=" flex flex-col md:flex-row w-full md:w-1/5">
+            <Input mr={5} placeholder="Search" fontSize={{ base:22, md:18}} mb={{base:5, md:0}}
+              p={{base:7, md:0}}/>
             <Button
-              w={{ base: 20, md: 40 }}
-              mr={"5"}
-              px="10"
-              mt={"-2"}
+              fontSize={{ base:20, md:18}}
+              px={{base:7, md:10}}
+              py={{base:7, md:0}}
               borderStyle={"solid"}
               borderWidth={"1px"}
               borderColor={"orange.500"}
               color={"orange.600"}
-              fontSize={{ base: 12, md: 15 }}
             >
-              Add Drivers
+              Add Driver
             </Button>
           </div>
-        </HStack>
+        </Box>
         <Box>
-          <ComponentTable driverData={driverData} />
+          <ComponentTable driverData={driverData} display={{base:'none', md:'block'}} />
+          <MobileResponsiveView driverData={driverData} display={{base:'block', md:'none'}}/>
         </Box>
       </Box>
     </>

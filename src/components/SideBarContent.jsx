@@ -27,7 +27,7 @@ const LinkItems = [
   { name: "Dashboard", icon: IoHome, to: "/" },
   { name: "Owner", icon: FaUserShield, to: "#" },
   { name: "Employee", icon: FaUserFriends,  subLinks:[
-    { name: "Driver", icon: FaUserFriends, to: "/driverList" },
+    { name: "Driver", icon: FaUserFriends, to: "/admin/driver-list" },
     { name: "Gatekeeper", icon: HiOutlineUsers, to: "#" },
   ] },
   { name: "Company", icon: FaRegBuilding ,  subLinks:[
@@ -100,11 +100,13 @@ const SidebarContent = ({ onClose, ...rest }) => {
 
           <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
         </Flex>
+        <Box className=" overflow-auto">
         {LinkItems.map((link) => (
           <NavItem key={link.name} icon={link.icon} to={link.to} subLinks={link.subLinks}>
             {link.name}
           </NavItem>
         ))}
+        </Box>
       </Box>
     );
   };

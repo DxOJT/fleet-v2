@@ -12,13 +12,14 @@ import LoginPage from "./pages/Login";
 
 //routes
 import adminRoutes from "./routes/adminRoutes";
-
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default createBrowserRouter([
   {
     // private routes
     path: "/",
     element: <ProtectedLayout />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: "/",
@@ -32,12 +33,7 @@ export default createBrowserRouter([
             //admin routes
             path: "/admin",
             children: adminRoutes,
-          },  
-
-
-       
-
-
+          },
         ],
       },
     ],
@@ -46,6 +42,7 @@ export default createBrowserRouter([
     // public routes
     path: "/",
     element: <HomeLayout />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: "/login",
@@ -54,5 +51,3 @@ export default createBrowserRouter([
     ],
   },
 ]);
-
-

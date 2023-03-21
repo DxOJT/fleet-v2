@@ -44,15 +44,14 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center min-h-screen bg-slate-800 p-5">
-      <div className="flex bg-white w-full md:w-1/3 p-3 justify-center border-orange-400 border-2">
+    <div className="flex justify-center items-center min-h-screen bg-slate-200 p-5">
+      <div className="flex bg-white w-full md:w-1/4 p-3 justify-center border-2">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="m-4 flex flex-col w-full lg:w-2/3"
+          className="m-2 flex flex-col w-full"
         >
           <Box className="flex flex-col items-center">
-            <Image src="/fleet.png" boxSize={"150px"} />
-            <Text className="text-3xl font-bold mb-5">Fleet Management</Text>
+            <Image src="/fleet.png" boxSize={"200px"} />
           </Box>
           <Text>Username</Text>
           <Input
@@ -63,7 +62,7 @@ const LoginPage = () => {
             errorBorderColor="crimson"
             placeholder="Username"
             {...register("Username", {
-              required: "This is required.",
+              required: "User not found.",
               onChange: () => setSample(false),
             })}
           />
@@ -82,7 +81,7 @@ const LoginPage = () => {
             placeholder="Password"
             onChange={() => setSample(false)}
             {...register("Password", {
-              required: "This is required.",
+              required: "Password incorrect!.",
               onChange: () => setSample(false),
             })}
           />

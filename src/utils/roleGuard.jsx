@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
-export const RoleGuardLayout = ({children}) => {
+export const RoleGuardLayout = ({ children }) => {
   let location = useLocation();
   const { userRole } = useAuth();
 
@@ -9,10 +9,5 @@ export const RoleGuardLayout = ({children}) => {
     return <Navigate to={`/${userRole}`} />;
   }
 
-
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 };

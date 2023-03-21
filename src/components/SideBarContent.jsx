@@ -28,7 +28,7 @@ const LinkItems = [
   { name: "Owner", icon: FaUserShield, to: "#" },
   { name: "Employee", icon: FaUserFriends,  subLinks:[
     { name: "Driver", icon: FaUserFriends, to: "/admin/driver-list" },
-    { name: "Gatekeeper", icon: HiOutlineUsers, to: "#" },
+    { name: "Gatekeeper", icon: HiOutlineUsers, to: "/admin/gatekeeper" },
   ] },
   { name: "Company", icon: FaRegBuilding ,  subLinks:[
  

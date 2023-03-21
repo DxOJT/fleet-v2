@@ -5,8 +5,10 @@ import {
   HStack,
   Text,
   Table,
+  Thead,
   Tbody,
   Tr,
+  Th,
   Td,
   Link,
 } from "@chakra-ui/react";
@@ -14,10 +16,11 @@ import {
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import { useState } from "react";
-import React from "react";
+
 const itemsPerPage = 5;
-function MobileResponsiveView({ driverData, ...rest }) {
-  const maxButtonsToShow = 5;
+const maxButtonsToShow = 5;
+
+const DriverTable = ({ driverData, ...rest }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const displayedData = driverData.slice(
@@ -73,33 +76,26 @@ function MobileResponsiveView({ driverData, ...rest }) {
 
     return pageNumbers;
   };
+
   return (
     <Box className=" bg-white rounded-2xl   p-2 " m={6} {...rest}>
       <Box className="border-solid border-gray-200 m-5 border p-5">
         <Table className="" variant="simple">
+          <Thead className=" ">
+            <Tr className=" bg-gray-200">
+              <Th>Name</Th>
+              <Th>LICENSE EXPIRY</Th>
+              <Th>ACTION</Th>
+            </Tr>
+          </Thead>
+
           <Tbody>
             {displayedData.map((item) => (
-              <Tr
-                key={item.id}
-                as="tr"
-                borderBottom={{ base: "1px solid orange" }}
-              >
-                <Td
-                  borderBottom=".5px solid  orange"
-                  style={{ boxSizing: "border-box" }}
-                >
-                  <Text className=" mb-4 font-bold"> Name: {item.name}</Text>
-                  <Text className=" text-gray-700">
-                    License Expiry: {item.DateOflicense}
-                  </Text>
-                </Td>
-                <Td
-                  borderBottom=".5px solid "
-                  style={{ boxSizing: "border-box" }}
-                  className=" text-orange-500"
-                  p={0}
-                >
-                  <Link>View</Link>
+              <Tr key={item.id}>
+                <Td>{item.name}</Td>
+                <Td>{item.DateOflicense}</Td>
+                <Td className=" text-blue-700">
+                  <Link>View Profile</Link>
                 </Td>
               </Tr>
             ))}
@@ -115,7 +111,9 @@ function MobileResponsiveView({ driverData, ...rest }) {
                     >
                       <Text
                         className={
-                          currentPage === 1 ? " bg-slate-500 p-3" : "  p-3  "
+                          currentPage === 1
+                            ? " bg-slate-500 p-3"
+                            : " bg-white p-3"
                         }
                       >
                         <IoIosArrowBack fontSize={25} />
@@ -123,16 +121,12 @@ function MobileResponsiveView({ driverData, ...rest }) {
                     </Button>
                     {getPageNumbersToShow().map((pageNumber) => (
                       <Button
-                        bg={"white"}
-                        className={
-                          pageNumber === currentPage
-                            ? "text-orange-500 btn border border-1 border-solid border-red-500    "
-                            : " hover:border-red-500 hover:text-red-500 border-2   rounded-md  p-3 font-bold   text-xl text-gray-700 border-red    "
-                        }
+                        className=" hover:border-red-500 hover:text-red-500 border-2   rounded-md  bg-white p-3 font-bold   text-xl text-gray-700 "
                         key={pageNumber}
+                        isActive={pageNumber === currentPage}
                         onClick={() => setCurrentPage(pageNumber)}
                       >
-                        <Text> {pageNumber} </Text>
+                        {pageNumber}
                       </Button>
                     ))}
                     {pageCount > maxButtonsToShow && (
@@ -154,7 +148,7 @@ function MobileResponsiveView({ driverData, ...rest }) {
                         className={
                           currentPage === pageCount
                             ? "  bg-slate-500 p-3"
-                            : " p-3"
+                            : " bg-white p-3"
                         }
                       >
                         <IoIosArrowForward fontSize={20} />
@@ -169,6 +163,6 @@ function MobileResponsiveView({ driverData, ...rest }) {
       </Box>
     </Box>
   );
-}
+};
 
-export default MobileResponsiveView;
+export default DriverTable;

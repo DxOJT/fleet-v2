@@ -100,7 +100,7 @@ const DriverList = () => {
           </div>
         </Box>
         <Box>
-          <ComponentTable
+          <DriverTable
             driverData={driverData}
             display={{ base: "none", md: "block" }}
           />

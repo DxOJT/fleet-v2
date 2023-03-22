@@ -27,7 +27,6 @@ const DriverTable = ({ driverData, ...rest }) => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-  console.log(displayedData);
   const pageCount = Math.ceil(driverData.length / itemsPerPage);
 
   const handlePrevClick = () => {

@@ -54,7 +54,7 @@ const DriverTable = ({ data, onViewButton }) => {
   return (
     <>
       <Table className="lg:block hidden" columns={columns} dataSource={data} />
-      <List data={data} onViewClick={console.log} render={listRender} />
+      <List className="lg:hidden block" data={data} onViewClick={console.log} render={listRender} />
     </>
   );
 };

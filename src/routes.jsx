@@ -1,28 +1,28 @@
-import { createBrowserRouter, useRouteError } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom';
 
 //route protect
-import { ProtectedLayout, HomeLayout } from "./utils/routeGuard";
-import { RoleGuardLayout } from "./utils/roleGuard";
+import { ProtectedLayout, HomeLayout } from './utils/routeGuard';
+import { RoleGuardLayout } from './utils/roleGuard';
 
 //Layouts
-import DashboardLayout from "./layout/dasboardLayout";
+import DashboardLayout from './layout/dasboardLayout';
 
 //pages
-import LoginPage from "./pages/Login";
+import LoginPage from './pages/login';
 
 //routes
-import adminRoutes from "./routes/adminRoutes";
-import NotFoundPage from "./pages/NotFoundPage";
+import adminRoutes from './routes/adminRoutes';
+import Result404 from './pages/results/404';
 
 export default createBrowserRouter([
   {
     // private routes
-    path: "/",
+    path: '/',
     element: <ProtectedLayout />,
-    errorElement: <NotFoundPage />,
+    errorElement: <Result404 />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: (
           <RoleGuardLayout>
             <DashboardLayout />
@@ -31,7 +31,7 @@ export default createBrowserRouter([
         children: [
           {
             //admin routes
-            path: "/admin",
+            path: '/admin',
             children: adminRoutes,
           },
         ],
@@ -40,12 +40,12 @@ export default createBrowserRouter([
   },
   {
     // public routes
-    path: "/",
+    path: '/',
     element: <HomeLayout />,
-    errorElement: <NotFoundPage />,
+    errorElement: <Result404 />,
     children: [
       {
-        path: "/login",
+        path: '/login',
         element: <LoginPage />,
       },
     ],

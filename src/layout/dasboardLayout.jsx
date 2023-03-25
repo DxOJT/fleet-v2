@@ -1,29 +1,44 @@
-import React from "react";
-import {
-  Box,
-  useDisclosure,
-} from "@chakra-ui/react";
+import React, { useEffect, useState } from 'react';
 
-import { useOutlet } from "react-router-dom";
-import Header from "../components/Header";
-import DrawerMobileView from "../components/Drawer";
-import SidebarContent from "../components/SideBarContent";
+// third party libraries
+import { Grid, Layout } from 'antd';
+import { Content } from 'antd/es/layout/layout';
+import { useOutlet } from 'react-router-dom';
 
+// components
+import Header from '../components/layout/header';
+import SidebarContent from '../components/layout/sidebar';
 export default function SidebarWithHeader({ children }) {
+  // data
+  const [collapsed, setCollapsed] = useState(false);
+  const [isMobileView, setHidden] = useState(false);
+
   const outlet = useOutlet();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const screens = Grid.useBreakpoint();
+
+  // useEffect
+  useEffect(() => {
+    if (screens.lg) {
+      setCollapsed(false);
+    } else if (screens.md) {
+      setCollapsed(true);
+    } else if (screens.sm) {
+      setCollapsed(true);
+    }
+    if (screens.sm) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  }, [screens]);
+
   return (
-    <Box  minH="100vh"  /*bg={useColorModeValue("gray.100", "gray.900")}*/  bg={"#EAEFF6"} >
-      <SidebarContent
-        onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
-      />
-      <DrawerMobileView isOpen={isOpen} onClose={onClose}/>
-      {/* mobilenav */}
-      <Header onOpen={onOpen}/>
-      <Box ml={{ base: 0, md: 60 }} p="4">
-        {outlet}
-      </Box>
-    </Box>
+    <Layout className="min-h-screen">
+      <SidebarContent collapsed={collapsed} isMobileView={isMobileView} setCollapsed={setCollapsed} />
+      <Layout className="site-layout">
+        <Header collapsed={collapsed} setCollapsed={setCollapsed} />
+        <Content className="m-5">{outlet}</Content>
+      </Layout>
+    </Layout>
   );
 }

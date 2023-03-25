@@ -1,9 +1,9 @@
 // thrid party libraries
 import { Button, Divider } from 'antd';
 
-const List = ({ data, onViewClick, render }) => {
+const List = ({ data, onViewClick, render, className }) => {
   return (
-    <div>
+    <div className={className}>
       {data.map((record) => (
         <>
           <div className="flex w-full justify-between">

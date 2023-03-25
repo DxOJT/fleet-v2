@@ -1,7 +1,7 @@
 // components
 import CardComponent from '../../components/admin/dashboardCard';
 
-export default Dashboard = () => {
+const Dashboard = () => {
   const sampledata = [
     { id: 1, count: 0, description: 'Franchise  in One  (1) month' },
     { id: 2, count: 0, description: 'Vehicle Registration expiring in (1) month' },
@@ -18,3 +18,4 @@ export default Dashboard = () => {
     </div>
   );
 };
+export default Dashboard;

@@ -80,7 +80,7 @@ const DriverList = () => {
     }
   }, [drivers]);
   useEffect(() => {
-    store.toggleTableLoading(false);
+    store.toggleTableLoading(driversLoading);
   }, [driversLoading]);
 
   return (

@@ -1,9 +1,10 @@
 // thrid party libraries
-import { Button, Divider } from 'antd';
+import { Button, Divider, Skeleton } from 'antd';
 
-const List = ({ data, onViewClick, render, className }) => {
+const List = ({ data, onViewClick, render, className, loading }) => {
   return (
     <div className={className}>
+      {loading && <Skeleton active />}
       {data.map((record) => (
         <>
           <div className="flex w-full justify-between">

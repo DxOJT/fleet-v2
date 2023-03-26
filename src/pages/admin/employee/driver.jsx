@@ -1,83 +1,91 @@
 // third party libraries
-import { Button, Card, Input, Typography } from 'antd';
+import { Button, Card, Input, Typography, Pagination } from 'antd';
+import { useQuery } from '@apollo/client';
+import { action, makeAutoObservable } from 'mobx';
+
+// context
+import { MyContext } from '../../../context/context';
+
+// graphql
+import { employee } from '../../../graphql/query.cjs';
 
 // components
 import DriverTable from '../../../components/admin/employee/driverTable';
+import { useEffect, useState } from 'react';
+class DriverListStore {
+  driverData = [];
+  tableLoading = true;
+  refetch;
+
+  constructor() {
+    makeAutoObservable(this, {
+      setDrivers: action.bound,
+      setRefetch: action.bound,
+      onViewButton: action.bound,
+    });
+  }
+
+  setDrivers(drivers) {
+    this.driverData = drivers;
+  }
+
+  toggleTableLoading() {
+    this.tableLoading = !this.tableLoading;
+  }
+
+  setRefetch(refetchFunction) {
+    this.refetch = refetchFunction;
+  }
+
+  onViewButton(id) {
+    return () => {
+      console.log(id);
+    };
+  }
+}
+const store = new DriverListStore();
 
 const DriverList = () => {
-  // data
-  const driverData = [
-    {
-      id: 1,
-      last_aname: 'Fuenteblanca',
-      first_name: 'Sonny Boy',
-      licence_expiration: '12/24/2023',
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPageSize, setCurrentPageSize] = useState(20);
+  const [totalItems, setTotalItems] = useState();
+  const {
+    data: drivers,
+    loading: driversLoading,
+    refetch,
+  } = useQuery(employee.GET_EMPLOYEES, {
+    variables: {
+      orderBy: { first_name: 'asc' },
+      limit: currentPageSize,
+      offset: currentPage * currentPageSize - currentPageSize,
     },
-    {
-      id: 2,
-      last_aname: 'Candido',
-      first_name: 'Cedric Franz',
-      licence_expiration: '12/24/2023',
-    },
-    {
-      id: 3,
-      last_aname: 'Camogues',
-      first_name: 'Sean',
-      licence_expiration: '12/24/2023',
-    },
-    {
-      id: 4,
-      last_aname: 'Cuyog',
-      first_name: 'Reyjan',
-      licence_expiration: '12/24/2023',
-    },
-    {
-      id: 5,
-      last_aname: 'Mabaho',
-      first_name: 'Eunice Balmes',
-      licence_expiration: '12/24/2023',
-    },
-    {
-      id: 6,
-      last_aname: 'ggggggggggg',
-      first_name: 'ggggggggggg',
-      licence_expiration: '12/24/2023',
-    },
-    {
-      id: 7,
-      last_aname: 'fffffffff',
-      first_name: 'fffffffff',
-      licence_expiration: '12/24/2023',
-    },
-    {
-      id: 8,
-      last_aname: 'jjjjjjjjjjj',
-      first_name: 'jjjjjjjjjjj',
-      licence_expiration: '12/24/2023',
-    },
-    {
-      id: 9,
-      last_aname: 'nnnnnnnnnnnn',
-      first_name: 'nnnnnnnnnnnn',
-      licence_expiration: '12/24/2023',
-    },
-    {
-      id: 10,
-      last_aname: 'Seganwqeqeqwe Abayo',
-      first_name: 'Seganwqeqeqwe Abayo',
-      licence_expiration: '12/24/2023',
-    },
+  });
 
-    {
-      id: 11,
-      last_aname: 'Abayo',
-      first_name: 'Segan',
-      licence_expiration: '12/24/2023',
-    },
-  ];
+  // fuctions
+
+  const handleChangePage = (page, pageSize) => {
+    setCurrentPageSize(pageSize);
+    setCurrentPage(page);
+    refetch({
+      orderBy: { first_name: 'asc' },
+      limit: pageSize,
+      offset: page * pageSize - pageSize,
+    });
+  };
+
+  // useEffects
+  useEffect(() => {
+    if (drivers && !driversLoading) {
+      setTotalItems(drivers.employee_aggregate.aggregate.count);
+      store.setDrivers(drivers.employee);
+    }
+  }, [drivers]);
+  useEffect(() => {
+    store.toggleTableLoading();
+  }, [driversLoading]);
 
   return (
-    <>
+    <MyContext.Provider value={store}>
       <Card className="mb-5">
         <div className="block lg:flex justify-between w-full">
           <Typography.Title className="block lg:hidden" level={4} style={{ margin: 0 }}>
@@ -87,7 +95,7 @@ const DriverList = () => {
             Drivers
           </Typography.Title>
           <div className="block lg:flex items-center">
-            <Input.Search className="lg:w-40 my-5 lg:mr-5 lg:my-0" search placeholder="Search"></Input.Search>
+            <Input.Search className="lg:w-40 my-5 lg:mr-5 lg:my-0" placeholder="Search" />
             <Button className="w-full lg:w-auto" type="primary" ghost>
               Add Driver
             </Button>
@@ -95,9 +103,18 @@ const DriverList = () => {
         </div>
       </Card>
       <Card>
-        <DriverTable data={driverData} onViewButton={console.log} />
+        <DriverTable />
+        <div className=" text-right">
+          <Pagination
+            current={currentPage}
+            defaultPageSize={currentPageSize}
+            showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
+            onChange={handleChangePage}
+            total={totalItems}
+          />
+        </div>
       </Card>
-    </>
+    </MyContext.Provider>
   );
 };
 

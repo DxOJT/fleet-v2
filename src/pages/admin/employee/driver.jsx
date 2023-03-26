@@ -29,8 +29,8 @@ class DriverListStore {
     this.driverData = drivers;
   }
 
-  toggleTableLoading() {
-    this.tableLoading = !this.tableLoading;
+  toggleTableLoading(loading) {
+    this.tableLoading = loading;
   }
 
   setRefetch(refetchFunction) {
@@ -62,7 +62,6 @@ const DriverList = () => {
   });
 
   // fuctions
-
   const handleChangePage = (page, pageSize) => {
     setCurrentPageSize(pageSize);
     setCurrentPage(page);
@@ -81,7 +80,7 @@ const DriverList = () => {
     }
   }, [drivers]);
   useEffect(() => {
-    store.toggleTableLoading();
+    store.toggleTableLoading(false);
   }, [driversLoading]);
 
   return (

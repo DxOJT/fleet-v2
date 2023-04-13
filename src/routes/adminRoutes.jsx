@@ -1,5 +1,6 @@
 // pages
 import Dashboard from '../pages/admin/dashboard';
+import AddDriver from '../pages/admin/employee/addDriver';
 import DriverList from '../pages/admin/employee/driver';
 
 export default [
@@ -10,5 +11,9 @@ export default [
   {
     path: '/admin/driver-list',
     element: <DriverList />,
+  },
+  {
+    path: '/admin/add-driver',
+    element: <AddDriver />,
   },
 ];

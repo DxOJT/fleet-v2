@@ -10,5 +10,5 @@ export default [
   {
     path: '/admin/driver-list',
     element: <DriverList />,
-  },
+  }
 ];

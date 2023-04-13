@@ -1,10 +1,8 @@
 import { Form, Upload, Modal } from "antd";
 import { useState } from "react";
-import { PlusOutlined, LoadingOutlined } from "@ant-design/icons";
-const UploadProfile = ({ form }) => {
+import { PlusOutlined } from "@ant-design/icons";
+const UploadProfile = ({ form, imageToView, setImageToView }) => {
   const [viewPhoto, setViewPhoto] = useState(false);
-  const [isUpload, setIsUpload] = useState(true);
-  const [imageToView, setImageToView] = useState(null);
   const rules = [
     () => ({
       validator(_, value) {
@@ -48,13 +46,12 @@ const UploadProfile = ({ form }) => {
   const profilePhotoRequest = ({ file, onSuccess }) => {
     getBase64(file, (url) => {
       console.log(file);
-      setIsUpload(false);
       setImageToView(url);
       onSuccess("ok");
     });
   };
   const profilePhotoOnRemove = () => {
-    setIsUpload(true);
+    setImageToView(null);
   };
   const togglePhotoModal = () => {
     setViewPhoto(!viewPhoto);
@@ -83,7 +80,7 @@ const UploadProfile = ({ form }) => {
           customRequest={profilePhotoRequest}
           onRemove={profilePhotoOnRemove}
         >
-          {isUpload ? uploadButton : null}
+          {!imageToView ? uploadButton : null}
         </Upload>
       </Form.Item>
     </>

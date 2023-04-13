@@ -16,8 +16,14 @@ import { UploadOutlined } from "@ant-design/icons";
 import { add_employee } from "../../../graphql/mutation.cjs";
 import { useMutation } from "@apollo/client";
 import moment from "moment";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { MyContext } from "../../../context/context";
 const { Text } = Typography;
 const AddDriver = () => {
+  const { refetch } = useContext(MyContext);
+  const navigate = useNavigate();
+  const [imageToView, setImageToView] = useState(null);
   const [form] = Form.useForm();
   const styles = {
     title: {
@@ -99,20 +105,19 @@ const AddDriver = () => {
         civil_status: values.civil_status,
         email: values.email,
         first_name: values.first_name,
-        height: values.height,
+        height: values.height?.toString(),
         last_name: values.last_name,
-        licence_number: values.licence_number,
+        licence_number: values.license_number,
         middle_name: values.middle_name,
         mobile_no: values.mobile_number,
-        profile_pic: "profile_pic",
+        profile_pic: imageToView,
         religion: values.religion,
         telephone: values.telephone_number,
-        weight: values.weight,
+        weight: values.weight?.toString(),
         employee_type: values.employee_type,
         gender: values.gender,
       },
-    });
-    console.error(error);
+    }).then(() => navigate("/admin/driver-list"));
   };
   return (
     <Form
@@ -149,7 +154,11 @@ const AddDriver = () => {
           </Typography.Title>
           <div className=" flex px-5 py-5 flex-col">
             <div className=" flex flex-row gap-2">
-              <UploadProfile form={form} />
+              <UploadProfile
+                form={form}
+                imageToView={imageToView}
+                setImageToView={setImageToView}
+              />
               <Text className=" w-44" type="secondary">
                 Recommended resolution is 640*640 with file size less than 2MB,
                 keep visual element centered

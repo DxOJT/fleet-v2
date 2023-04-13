@@ -1,7 +1,7 @@
 // third party libraries
-import { Button, Card, Input, Typography, Pagination } from "antd";
+import { Button, Card, Input, Typography, Pagination, Form } from "antd";
 import { useQuery } from "@apollo/client";
-import { action, makeAutoObservable } from "mobx";
+import { action, makeAutoObservable, toJS } from "mobx";
 
 // context
 import { MyContext } from "../../../context/context";
@@ -17,7 +17,8 @@ class DriverListStore {
   driverData = [];
   tableLoading = true;
   refetch;
-
+  activeID = null;
+  // form = Form.useForm();
   constructor() {
     makeAutoObservable(this, {
       setDrivers: action.bound,
@@ -40,7 +41,7 @@ class DriverListStore {
 
   onViewButton(id) {
     return () => {
-      console.log(id);
+      this.activeID = id;
     };
   }
 }

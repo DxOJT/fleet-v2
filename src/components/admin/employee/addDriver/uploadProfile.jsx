@@ -47,7 +47,6 @@ const UploadProfile = ({ form }) => {
   };
   const profilePhotoRequest = ({ file, onSuccess }) => {
     getBase64(file, (url) => {
-      console.log(file);
       setIsUpload(false);
       setImageToView(url);
       onSuccess("ok");

@@ -16,20 +16,24 @@ import { UploadOutlined } from "@ant-design/icons";
 import { add_employee } from "../../../graphql/mutation.cjs";
 import { useMutation } from "@apollo/client";
 import moment from "moment";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MyContext } from "../../../context/context";
 const { Text } = Typography;
 const AddDriver = () => {
-  const { refetch } = useContext(MyContext);
   const navigate = useNavigate();
   const [imageToView, setImageToView] = useState(null);
   const [form] = Form.useForm();
+  const [addEmployee, { data, loading, error }] = useMutation(
+    add_employee.ADD_EMPLOYEE
+  );
+
   const styles = {
     title: {
       fontWeight: "bolder",
     },
   };
+
+  //form rules
   const rules = {
     first_name: [{ required: true, message: "First name is required!" }],
     middle_name: [{ required: true, message: "Middle name is required!" }],
@@ -75,6 +79,7 @@ const AddDriver = () => {
       }),
     ],
   };
+
   const employeeTypes = [{ value: "driver", label: "Driver" }];
   const religions = [{ value: "catholic", label: "Catholic" }];
   const civilStatus = [
@@ -88,15 +93,17 @@ const AddDriver = () => {
     { value: "male", label: "Male" },
     { value: "female", label: "Female" },
   ];
+
+  //regex for phone number syntax
   function phoneNumberSyntax(str) {
     return /^(09|\+639)\d{9}$/.test(str);
   }
+  //regex for telephone number syntax
   function telephoneNumberSyntax(str) {
     return /\d{4}\-\d{4}$/.test(str);
   }
-  const [addEmployee, { data, loading, error }] = useMutation(
-    add_employee.ADD_EMPLOYEE
-  );
+
+  //to insert new employee (onFinish of the form)
   const submitDriver = (values) => {
     console.log(form.getFieldsValue());
     addEmployee({

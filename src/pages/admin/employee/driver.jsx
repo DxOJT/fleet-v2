@@ -17,7 +17,6 @@ class DriverListStore {
   driverData = [];
   tableLoading = true;
   refetch;
-  activeID = null;
   // form = Form.useForm();
   constructor() {
     makeAutoObservable(this, {
@@ -41,7 +40,7 @@ class DriverListStore {
 
   onViewButton(id) {
     return () => {
-      this.activeID = id;
+      console.log(id);
     };
   }
 }

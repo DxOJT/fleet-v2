@@ -64,7 +64,24 @@ export const add_employee = {
 
 export const update_employee ={
   UPDATE_EMPLOYEE: gql`
-  mutation InsertEmployee($licence_expiration: timestamptz, $civil_status: String, $email: String, $first_name: String, $height: String, $last_name: String, $licence_number: String, $middle_name: String, $mobile_no: String, $profile_pic: String, $religion: String, $telephone: String, $weight: String, $employee_type: String, $gender: String, $id: String) {
-    update_employee(where: {id: {_eq: $id}})
+  mutation UpdateEmployee($set: employee_set_input, $id: uuid!) {
+    update_employee_by_pk(pk_columns: {id: $id}, _set: $set) {
+      civil_status
+      email
+      employee_type
+      first_name
+      gender
+      height
+      id
+      last_name
+      licence_expiration
+      licence_number
+      middle_name
+      mobile_no
+      profile_pic
+      religion
+      telephone
+      weight
+    }
   }`
 };

@@ -51,11 +51,9 @@ const UploadProfile = ({ form, imageToView, setImageToView }) => {
   //custom request to set image to base64 and set it to imageToView state
   const profilePhotoRequest = ({ file, onSuccess }) => {
     getBase64(file, (url) => {
-      console.log(file);
       setImageToView(url);
       onSuccess("ok");
     });
-    console.log(form.getFieldsValue().photo);
   };
 
   //remove uploaded function to remove base64 to the imageToView state

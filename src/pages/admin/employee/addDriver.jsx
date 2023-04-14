@@ -105,7 +105,6 @@ const AddDriver = () => {
 
   //to insert new employee (onFinish of the form)
   const submitDriver = (values) => {
-    console.log(form.getFieldsValue());
     addEmployee({
       variables: {
         licence_expiration: moment(values.expiration_date),

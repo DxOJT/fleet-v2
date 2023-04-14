@@ -1,7 +1,7 @@
 // pages
 import Dashboard from "../pages/admin/dashboard";
 import DriverList from "../pages/admin/employee/driver";
-import AddDriver from "../pages/admin/employee/addDriver";
+import GatekeeperList from "../pages/admin/employee/gatekeeper";
 
 export default [
   {
@@ -13,7 +13,7 @@ export default [
     element: <DriverList />,
   },
   {
-    path: "/admin/add-driver",
-    element: <AddDriver />,
+    path: "/admin/gatekeeper-list",
+    element: <GatekeeperList />,
   },
 ];

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@apollo/client": "^3.7.9",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -25,7 +26,7 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
+    "react-icons": "^4.8.0",
     "react-router-dom": "^6.8.2",
     "sort-by": "^1.2.0",
     "subscriptions-transport-ws": "^0.11.0"

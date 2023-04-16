@@ -4,6 +4,7 @@ export const employee = {
   GET_EMPLOYEES: gql`
     query getEpmloyees($where: employee_bool_exp, $orderBy: [employee_order_by!], $limit: Int, $offset: Int) {
       employee(order_by: $orderBy, where: $where, limit: $limit, offset: $offset) {
+        profile_pic
         civil_status
         email
         employee_type

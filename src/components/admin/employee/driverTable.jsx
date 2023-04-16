@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 // third party libraries
-import { Table, Tooltip } from "antd";
+import { Table, Tooltip, Button } from "antd";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import Typography from "antd/es/typography/Typography.js";
 import { observer } from "mobx-react";
@@ -16,9 +16,12 @@ import { displayFulllName } from "../../../helper/name.cjs";
 // components
 import List from "../../etc/list.jsx";
 import DriverModal from "./DriverModal.jsx";
+import { useNavigate } from "react-router-dom";
+import { toJS } from "mobx";
 
 const DriverTable = () => {
-  const { driverData, tableLoading, onViewButton } = useContext(MyContext);
+  const { driverData, tableLoading } = useContext(MyContext);
+  const navigate = useNavigate();
   const columns = [
     {
       title: "Name",
@@ -53,7 +56,12 @@ const DriverTable = () => {
           >
             <BsBoxArrowUpRight
               className=" mt-1"
-              onClick={onViewButton(record.id)}
+              type="link"
+              onClick={() =>
+                navigate("/admin/driver-view-details", {
+                  state: { ...toJS(record) },
+                })
+              }
             />
           </Tooltip>
           <Tooltip
@@ -92,7 +100,6 @@ const DriverTable = () => {
         loading={tableLoading}
         className="lg:hidden block"
         data={driverData}
-        onViewClick={onViewButton}
         render={listRender}
       />
     </>

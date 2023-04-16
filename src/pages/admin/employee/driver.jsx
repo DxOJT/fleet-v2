@@ -1,7 +1,7 @@
 // third party libraries
-import { Button, Card, Input, Typography, Pagination } from "antd";
+import { Button, Card, Input, Typography, Pagination, Form } from "antd";
 import { useQuery } from "@apollo/client";
-import { action, makeAutoObservable } from "mobx";
+import { action, makeAutoObservable, toJS } from "mobx";
 
 // context
 import { MyContext } from "../../../context/context";
@@ -13,11 +13,12 @@ import { employee } from "../../../graphql/query.cjs";
 import DriverTable from "../../../components/admin/employee/driverTable";
 import DriverModal from "../../../components/admin/employee/DriverModal";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 class DriverListStore {
   driverData = [];
   tableLoading = true;
   refetch;
-
+  // form = Form.useForm();
   constructor() {
     makeAutoObservable(this, {
       setDrivers: action.bound,
@@ -105,9 +106,11 @@ const DriverList = () => {
               className="lg:w-40 my-5 lg:mr-5 lg:my-0"
               placeholder="Search"
             />
-            <Button className="w-full lg:w-auto" type="primary" ghost>
-              Add Driver
-            </Button>
+            <Link to={"/admin/add-driver"}>
+              <Button className="w-full lg:w-auto" type="primary" ghost>
+                Add Driver
+              </Button>
+            </Link>
           </div>
         </div>
       </Card>

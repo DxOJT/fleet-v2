@@ -11,7 +11,7 @@ export default [
   {
     path: "/admin/driver-list",
     element: <DriverList />,
-  }
+  },
   {
     path: "/admin/gatekeeper-list",
     element: <GatekeeperList />,

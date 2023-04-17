@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 // third party libraries
-import { CloseOutlined } from '@ant-design/icons';
-import { Button, Drawer, Menu, theme, Typography } from 'antd';
-import Sider from 'antd/es/layout/Sider';
-import { IoHome } from 'react-icons/io5';
+import { CloseOutlined } from "@ant-design/icons";
+import { Button, Drawer, Menu, theme, Typography } from "antd";
+import Sider from "antd/es/layout/Sider";
+import { IoHome } from "react-icons/io5";
 import {
   FaUserShield,
   FaUserFriends,
@@ -16,16 +16,16 @@ import {
   FaWarehouse,
   FaRegHandshake,
   FaGasPump,
-} from 'react-icons/fa';
-import { FiSettings } from 'react-icons/fi';
-import { HiOutlineUsers } from 'react-icons/hi';
-import { useLocation, useNavigate } from 'react-router-dom';
+} from "react-icons/fa";
+import { FiSettings } from "react-icons/fi";
+import { HiOutlineUsers } from "react-icons/hi";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // helpers
-import { getItem } from '../../helper/navitem.cjs';
+import { getItem } from "../../helper/navitem.cjs";
 
 //custom hooks
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from "../../hooks/useAuth";
 
 const SidebarContent = ({ isMobileView, collapsed, setCollapsed }) => {
   // data
@@ -36,21 +36,21 @@ const SidebarContent = ({ isMobileView, collapsed, setCollapsed }) => {
     token: { colorBgContainer, colorPrimary },
   } = theme.useToken();
   const items = [
-    getItem('Dashboard', `/${userRole}`, <IoHome />),
-    getItem('Owner', '#', <FaUserShield />),
-    getItem('Employee', 'sub1', <FaUserFriends />, [
-      getItem('Driver', '/admin/driver-list', <FaUserFriends />),
-      getItem('Gatekeeper', '#', <HiOutlineUsers />),
+    getItem("Dashboard", `/${userRole}`, <IoHome />),
+    getItem("Owner", "#", <FaUserShield />),
+    getItem("Employee", "sub1", <FaUserFriends />, [
+      getItem("Driver", "/admin/driver-list", <FaUserFriends />),
+      getItem("Gatekeeper", "/admin/gatekeeper-list", <HiOutlineUsers />),
     ]),
-    getItem('Company', '#', <FaRegBuilding />, []),
-    getItem('Vehicles', '#', <FaCarSide />, []),
-    getItem('Insurance', '#', <FaUserInjured />),
-    getItem('Inventory', '#', <FaFileInvoice />, []),
-    getItem('Taxi', '#', <FaFileInvoice />),
-    getItem('Garage', '#', <FaWarehouse />),
-    getItem('Transaction', '#', <FaRegHandshake />, []),
-    getItem('Fuel', '#', <FaGasPump />),
-    getItem('Settings', '#', <FiSettings />, []),
+    getItem("Company", "#", <FaRegBuilding />, []),
+    getItem("Vehicles", "#", <FaCarSide />, []),
+    getItem("Insurance", "#", <FaUserInjured />),
+    getItem("Inventory", "#", <FaFileInvoice />, []),
+    getItem("Taxi", "#", <FaFileInvoice />),
+    getItem("Garage", "#", <FaWarehouse />),
+    getItem("Transaction", "#", <FaRegHandshake />, []),
+    getItem("Fuel", "#", <FaGasPump />),
+    getItem("Settings", "#", <FiSettings />, []),
   ];
   // functions
   const hadelDrawerOnClose = () => {
@@ -83,7 +83,12 @@ const SidebarContent = ({ isMobileView, collapsed, setCollapsed }) => {
               </Typography.Title>
             )}
           </div>
-          <Menu mode="inline" items={items} onClick={handleMenuClick} defaultSelectedKeys={location.pathname} />
+          <Menu
+            mode="inline"
+            items={items}
+            onClick={handleMenuClick}
+            defaultSelectedKeys={location.pathname}
+          />
         </Sider>
       ) : (
         <Drawer
@@ -99,12 +104,22 @@ const SidebarContent = ({ isMobileView, collapsed, setCollapsed }) => {
           onClose={hadelDrawerOnClose}
           closable={false}
           extra={
-            <Button type="text" className="mr-2" danger onClick={hadelDrawerOnClose}>
+            <Button
+              type="text"
+              className="mr-2"
+              danger
+              onClick={hadelDrawerOnClose}
+            >
               <CloseOutlined className=" text-lg" />
             </Button>
           }
         >
-          <Menu mode="inline" items={items} onClick={handleMenuMobileClick} defaultSelectedKeys={location.pathname} />
+          <Menu
+            mode="inline"
+            items={items}
+            onClick={handleMenuMobileClick}
+            defaultSelectedKeys={location.pathname}
+          />
         </Drawer>
       )}
     </>

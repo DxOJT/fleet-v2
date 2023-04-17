@@ -1,22 +1,32 @@
 import React from "react";
-import { Modal, Input, Form, Tooltip, Button, message } from "antd";
-import { FiUserPlus } from "react-icons/fi";
-
 import { useState } from "react";
 import { useContext } from "react";
-
+// third party libraries
+import { Modal, Input, Form, Tooltip, Button, message } from "antd";
+import { FiUserPlus } from "react-icons/fi";
+// context
 import { MyContext } from "../../../context/context";
+//graphql
 import { CREATE_USER_ACC } from "../../../graphql/CreateUserQuery.cjs";
-import { useMutation, useQuery } from "@apollo/client";
 import { GET_USER } from "../../../graphql/CheckUserQuery";
+import { useMutation, useQuery } from "@apollo/client";
 
 function DriverModal({ props }) {
   const { driverData } = useContext(MyContext);
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { loading: LoadingUser, data: DataUser, refetch } = useQuery(GET_USER);
-  const [create_user, { data, loading, error, reset }] =
-    useMutation(CREATE_USER_ACC);
+  const initialValue = {
+    email: "",
+    password: "",
+  };
+  const [create_user] = useMutation(CREATE_USER_ACC, {
+    onCompleted() {
+      message.success("Created User Account Succesfully");
+      handleCancel();
+      handleRefetch();
+    },
+  });
   const onFinish = (value) => {
     create_user({
       variables: {
@@ -26,9 +36,6 @@ function DriverModal({ props }) {
         employee_id: props.id,
       },
     });
-    message.success("Created User Account Succesfully");
-    handleCancel();
-    handleRefetch();
   };
   const handleRefetch = () => {
     refetch();
@@ -68,7 +75,6 @@ function DriverModal({ props }) {
             maxWidth: 600,
           }}
           onFinish={onFinish}
-          autoComplete="off"
           form={form}
         >
           <Form.Item
@@ -85,7 +91,7 @@ function DriverModal({ props }) {
               },
             ]}
           >
-            <Input />
+            <Input placeholder="Please Enter Your Email" />
           </Form.Item>
 
           <Form.Item

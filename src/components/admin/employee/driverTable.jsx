@@ -1,18 +1,14 @@
 import { useContext } from "react";
-
 // third party libraries
 import { Table, Tooltip } from "antd";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import Typography from "antd/es/typography/Typography.js";
 import { observer } from "mobx-react";
 import moment from "moment";
-
 // context
 import { MyContext } from "../../../context/context.jsx";
-
 // helpers
 import { displayFulllName } from "../../../helper/name.cjs";
-
 // components
 import List from "../../etc/list.jsx";
 import DriverModal from "./DriverModal.jsx";
@@ -41,7 +37,6 @@ const DriverTable = () => {
         </Typography.Text>
       ),
     },
-
     {
       title: "Action",
       key: "action",

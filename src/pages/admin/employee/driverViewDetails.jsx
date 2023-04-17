@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ChangeProfile from "../../../components/admin/employee/driverView/changeProfile";
 import DriverFormLayout from "../../../components/admin/employee/formLayout/driverFormLayout.jsx";
+import EditUserModal from "../../../components/admin/employee/editUserModal.jsx";
 const DriverViewDetails = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
@@ -94,9 +95,7 @@ const DriverViewDetails = () => {
             <Button type="primary" ghost htmlType="submit">
               Save
             </Button>
-            <Button type="primary" ghost>
-              Edit Credentials
-            </Button>
+            <EditUserModal props={data} />
           </div>
         }
       </DriverFormLayout>

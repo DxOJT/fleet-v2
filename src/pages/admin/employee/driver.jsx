@@ -41,6 +41,9 @@ class DriverListStore {
   onViewButton(id) {
     return () => {};
   }
+  setModalIdOpen(id) {
+    return () => {};
+  }
 }
 const store = new DriverListStore();
 

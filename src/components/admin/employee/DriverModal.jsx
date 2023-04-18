@@ -1,69 +1,43 @@
 import React from "react";
-import { useState } from "react";
-import { useContext } from "react";
 // third party libraries
-import { Modal, Input, Form, Tooltip, Button, message } from "antd";
-import { FiUserPlus } from "react-icons/fi";
-// context
-import { MyContext } from "../../../context/context";
-//graphql
-import { CREATE_USER_ACC } from "../../../graphql/CreateUserQuery.cjs";
-import { GET_USER } from "../../../graphql/CheckUserQuery";
-import { useMutation, useQuery } from "@apollo/client";
 
-function DriverModal({ props }) {
-  const { driverData } = useContext(MyContext);
-  const [form] = Form.useForm();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { loading: LoadingUser, data: DataUser, refetch } = useQuery(GET_USER);
-  const initialValue = {
-    email: "",
-    password: "",
-  };
+import { Modal, Input, Form, Button, message } from "antd";
+
+//graphql
+
+import { CREATE_USER_ACC } from "../../../graphql/CreateUserQuery.cjs";
+import { useMutation } from "@apollo/client";
+
+function DriverModal({ props, modalIdOpen, setModalIdOpen, refetch }) {
   const [create_user] = useMutation(CREATE_USER_ACC, {
     onCompleted() {
       message.success("Created User Account Succesfully");
-      handleCancel();
-      handleRefetch();
+      setModalIdOpen(null);
+      refetch();
     },
   });
+  const [form] = Form.useForm();
   const onFinish = (value) => {
     create_user({
       variables: {
         email: value.email,
         password: value.password,
-        role: "Driver",
+        role: "driver",
         employee_id: props.id,
       },
     });
   };
-  const handleRefetch = () => {
-    refetch();
-  };
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  const employeeID = props.id;
-  const filteredId = !LoadingUser
-    ? DataUser.user.filter((id) => id.employee_id === employeeID)
-    : [];
   return (
     <div>
-      <Tooltip
-        title={() => <div className=" text-black">Create User Account</div>}
-        color={"#Ce7936"}
+      <Modal
+        title="Create User"
+        onCancel={() => {
+          setModalIdOpen(null);
+        }}
+        open={modalIdOpen === props.id}
+        footer={[]}
       >
-        <FiUserPlus
-          visibility={filteredId[0]?.id ? " hidden" : "visible"}
-          onClick={showModal}
-        />
-      </Tooltip>
-      <Modal title="Create User" open={isModalOpen} footer={[]}>
         <Form
           labelCol={{
             span: 8,
@@ -107,7 +81,7 @@ function DriverModal({ props }) {
             <Input.Password />
           </Form.Item>
           <div className=" flex  justify-end gap-3">
-            <Button onClick={handleCancel}>Cancel</Button>
+            <Button onClick={() => setModalIdOpen(null)}>Cancel</Button>
             <Button
               htmlType="submit"
               className=" border-orange-600 border-1 text-orange-600"

@@ -1,20 +1,37 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+
 // third party libraries
+
 import { Table, Tooltip } from "antd";
 import { BsBoxArrowUpRight } from "react-icons/bs";
+import { FiUserPlus } from "react-icons/fi";
 import Typography from "antd/es/typography/Typography.js";
-import { observer } from "mobx-react";
 import moment from "moment";
+
 // context
+
 import { MyContext } from "../../../context/context.jsx";
+
+//mobx
+
+import { observer } from "mobx-react";
+
 // helpers
+
 import { displayFulllName } from "../../../helper/name.cjs";
+
 // components
+
 import List from "../../etc/list.jsx";
 import DriverModal from "./DriverModal.jsx";
+import { useQuery } from "@apollo/client";
+import { GET_USER } from "../../../graphql/CheckUserQuery.js";
 
 const DriverTable = () => {
   const { driverData, tableLoading, onViewButton } = useContext(MyContext);
+  const [modalIdOpen, setModalIdOpen] = useState(null);
+  const { loading: LoadingUser, data: DataUser, refetch } = useQuery(GET_USER);
+
   const columns = [
     {
       title: "Name",
@@ -40,25 +57,49 @@ const DriverTable = () => {
     {
       title: "Action",
       key: "action",
-      render: (_, record) => (
-        <div className=" flex gap-2 text-orange-500">
-          <Tooltip
-            title={() => <div className="text-black">View Details</div>}
-            color={"#Ce7936"}
-          >
-            <BsBoxArrowUpRight
-              className=" mt-1"
-              onClick={onViewButton(record.id)}
-            />
-          </Tooltip>
-          <Tooltip
-            title={() => <div className=" text-black">Create User Account</div>}
-            color={"#Ce7936"}
-          >
-            <DriverModal props={record} />
-          </Tooltip>
-        </div>
-      ),
+      render: (_, record) => {
+        const employeeID = record.id;
+        const filteredId = !LoadingUser
+          ? DataUser.user.filter((id) => id.employee_id === employeeID)
+          : [];
+        return (
+          <div className=" flex gap-2 text-orange-500">
+            <Tooltip
+              title={() => <div className="text-black">View Details</div>}
+              color={"#Ce7936"}
+            >
+              <BsBoxArrowUpRight
+                className=" mt-1"
+                onClick={onViewButton(record.id)}
+              />
+            </Tooltip>
+            <Tooltip
+              title={() => (
+                <div className=" text-black">Create User Account</div>
+              )}
+              color={"#Ce7936"}
+            >
+              <DriverModal
+                props={record}
+                modalIdOpen={modalIdOpen}
+                setModalIdOpen={setModalIdOpen}
+                refetch={refetch}
+              />
+            </Tooltip>
+            <Tooltip
+              title={() => (
+                <div className=" text-black">Create User Account</div>
+              )}
+              color={"#Ce7936"}
+            >
+              <FiUserPlus
+                visibility={filteredId[0]?.id ? " hidden" : "visible"}
+                onClick={() => setModalIdOpen(record.id)}
+              />
+            </Tooltip>
+          </div>
+        );
+      },
     },
   ];
   const listRender = (record) => (

@@ -8,7 +8,7 @@ import { Modal, Input, Form, Button, message } from "antd";
 import { CREATE_USER_ACC } from "../../../graphql/CreateUserQuery.cjs";
 import { useMutation } from "@apollo/client";
 
-function DriverModal({ props, modalIdOpen, setModalIdOpen, refetch }) {
+function DriverModal({ modalIdOpen, setModalIdOpen, refetch }) {
   const [create_user] = useMutation(CREATE_USER_ACC, {
     onCompleted() {
       message.success("Created User Account Succesfully");
@@ -23,7 +23,7 @@ function DriverModal({ props, modalIdOpen, setModalIdOpen, refetch }) {
         email: value.email,
         password: value.password,
         role: "driver",
-        employee_id: props.id,
+        employee_id: modalIdOpen,
       },
     });
   };
@@ -35,7 +35,7 @@ function DriverModal({ props, modalIdOpen, setModalIdOpen, refetch }) {
         onCancel={() => {
           setModalIdOpen(null);
         }}
-        open={modalIdOpen === props.id}
+        open={modalIdOpen ? true : false}
         footer={[]}
       >
         <Form

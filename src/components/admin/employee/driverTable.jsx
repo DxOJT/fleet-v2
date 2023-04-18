@@ -59,9 +59,11 @@ const DriverTable = () => {
       key: "action",
       render: (_, record) => {
         const employeeID = record.id;
+
         const filteredId =
           !LoadingUser &&
           DataUser.user.filter((id) => id.employee_id === employeeID);
+
         return (
           <div className=" flex gap-2 text-orange-500">
             <Tooltip
@@ -78,14 +80,7 @@ const DriverTable = () => {
                 <div className=" text-black">Create User Account</div>
               )}
               color={"#Ce7936"}
-            >
-              <DriverModal
-                props={record}
-                modalIdOpen={modalIdOpen}
-                setModalIdOpen={setModalIdOpen}
-                refetch={refetch}
-              />
-            </Tooltip>
+            ></Tooltip>
             <Tooltip
               title={() => (
                 <div className=" text-black">Create User Account</div>
@@ -124,12 +119,19 @@ const DriverTable = () => {
         dataSource={driverData}
         pagination={false}
       />
+
       <List
         loading={tableLoading}
         className="lg:hidden block"
         data={driverData}
         onViewClick={onViewButton}
         render={listRender}
+      />
+      <DriverModal
+        key={modalIdOpen}
+        modalIdOpen={modalIdOpen}
+        setModalIdOpen={setModalIdOpen}
+        refetch={refetch}
       />
     </>
   );

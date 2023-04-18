@@ -59,9 +59,9 @@ const DriverTable = () => {
       key: "action",
       render: (_, record) => {
         const employeeID = record.id;
-        const filteredId = !LoadingUser
-          ? DataUser.user.filter((id) => id.employee_id === employeeID)
-          : [];
+        const filteredId =
+          !LoadingUser &&
+          DataUser.user.filter((id) => id.employee_id === employeeID);
         return (
           <div className=" flex gap-2 text-orange-500">
             <Tooltip

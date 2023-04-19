@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import moment from "moment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DriverFormLayout from "../../../components/admin/employee/formLayout/driverFormLayout";
+import DriverFormLayout from "../../../components/admin/employee/addDriver/driverFormLayout";
 const AddDriver = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();

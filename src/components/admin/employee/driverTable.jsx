@@ -80,12 +80,6 @@ const DriverTable = () => {
                 <div className=" text-black">Create User Account</div>
               )}
               color={"#Ce7936"}
-            ></Tooltip>
-            <Tooltip
-              title={() => (
-                <div className=" text-black">Create User Account</div>
-              )}
-              color={"#Ce7936"}
             >
               <FiUserPlus
                 visibility={filteredId[0]?.id ? " hidden" : "visible"}

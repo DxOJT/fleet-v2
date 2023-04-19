@@ -7,9 +7,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DriverFormLayout from "../../../components/admin/employee/formLayout/driverFormLayout";
 const AddDriver = () => {
+  const [form] = Form.useForm();
   const navigate = useNavigate();
   const [imageToView, setImageToView] = useState(null);
-  const [form] = Form.useForm();
   const [addEmployee, { data, loading, error }] = useMutation(
     add_employee.ADD_EMPLOYEE
   );
@@ -42,6 +42,31 @@ const AddDriver = () => {
       },
     }).then(() => navigate("/admin/driver-list"));
   };
+
+  const topCard = (
+    <Card className="mb-5">
+      <div className="block lg:flex justify-between w-full">
+        <Typography.Title
+          className="block"
+          level={4}
+          style={{ margin: 0, ...styles.title }}
+        >
+          Add Driver
+        </Typography.Title>
+        <div className="block lg:flex items-center">
+          <Button
+            className="w-full lg:w-auto my-5 lg:mr-5 lg:my-0 px-14"
+            type="primary"
+            ghost
+            htmlType="submit"
+          >
+            Save
+          </Button>
+        </div>
+      </div>
+    </Card>
+  );
+
   const uploadPhoto = (
     <UploadProfile
       form={form}
@@ -50,35 +75,12 @@ const AddDriver = () => {
     />
   );
   return (
-    <Form
-      onFinish={submitDriver}
+    <DriverFormLayout
+      uploadPhotoForm={uploadPhoto}
+      mutationFunction={submitDriver}
       form={form}
-      labelWrap={true}
-      labelCol={{ span: 8 }}
-    >
-      <Card className="mb-5">
-        <div className="block lg:flex justify-between w-full">
-          <Typography.Title
-            className="block"
-            level={4}
-            style={{ margin: 0, ...styles.title }}
-          >
-            Add Driver
-          </Typography.Title>
-          <div className="block lg:flex items-center">
-            <Button
-              className="w-full lg:w-auto my-5 lg:mr-5 lg:my-0 px-14"
-              type="primary"
-              ghost
-              htmlType="submit"
-            >
-              Save
-            </Button>
-          </div>
-        </div>
-      </Card>
-      <DriverFormLayout uploadPhotoForm={uploadPhoto} />
-    </Form>
+      topCard={topCard}
+    />
   );
 };
 

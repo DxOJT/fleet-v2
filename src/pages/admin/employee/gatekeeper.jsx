@@ -10,24 +10,23 @@ import { MyContext } from "../../../context/context";
 import { employee } from "../../../graphql/query.cjs";
 
 // components
-import DriverTable from "../../../components/admin/employee/driverTable";
+import GatekeeperTable from "../../../components/admin/employee/gatekeeperTable";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-class DriverListStore {
-  driverData = [];
+class GatekeeperListStore {
+  gatekeeperData = [];
   tableLoading = true;
   refetch;
 
   constructor() {
     makeAutoObservable(this, {
-      setDrivers: action.bound,
+      setGatekeeper: action.bound,
       setRefetch: action.bound,
       onViewButton: action.bound,
     });
   }
 
-  setDrivers(drivers) {
-    this.driverData = drivers;
+  setGatekeeper(gatekeeper) {
+    this.gatekeeperData = gatekeeper;
   }
 
   toggleTableLoading(loading) {
@@ -39,21 +38,20 @@ class DriverListStore {
   }
 
   onViewButton(id) {
-    return () => {};
-  }
-  setModalIdOpen(id) {
-    return () => {};
+    return () => {
+      console.log(id);
+    };
   }
 }
-const store = new DriverListStore();
+const store = new GatekeeperListStore();
 
 const DriverList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPageSize, setCurrentPageSize] = useState(20);
   const [totalItems, setTotalItems] = useState();
   const {
-    data: drivers,
-    loading: driversLoading,
+    data: gatekeepers,
+    loading: gatekeepersLoading,
     refetch,
   } = useQuery(employee.GET_EMPLOYEES, {
     variables: {
@@ -76,15 +74,14 @@ const DriverList = () => {
 
   // useEffects
   useEffect(() => {
-    if (drivers && !driversLoading) {
-      setTotalItems(drivers.employee_aggregate.aggregate.count);
-      store.setDrivers(drivers.employee);
-      refetch();
+    if (gatekeepers && !gatekeepersLoading) {
+      setTotalItems(gatekeepers.employee_aggregate.aggregate.count);
+      store.setGatekeeper(gatekeepers.employee);
     }
-  }, [drivers]);
+  }, [gatekeepers]);
   useEffect(() => {
-    store.toggleTableLoading(driversLoading);
-  }, [driversLoading]);
+    store.toggleTableLoading(gatekeepersLoading);
+  }, [gatekeepersLoading]);
 
   return (
     <MyContext.Provider value={store}>
@@ -95,30 +92,28 @@ const DriverList = () => {
             level={4}
             style={{ margin: 0 }}
           >
-            Drivers
+            Gatekeepers
           </Typography.Title>
           <Typography.Title
             className="hidden lg:block"
             level={2}
             style={{ margin: 0 }}
           >
-            Drivers
+            Gatekeepers
           </Typography.Title>
           <div className="block lg:flex items-center">
             <Input.Search
               className="lg:w-40 my-5 lg:mr-5 lg:my-0"
               placeholder="Search"
             />
-            <Link to={"/admin/add-driver"}>
-              <Button className="w-full lg:w-auto" type="primary" ghost>
-                Add Driver
-              </Button>
-            </Link>
+            <Button className="w-full lg:w-auto" type="primary" ghost>
+              Add Gatekeeper
+            </Button>
           </div>
         </div>
       </Card>
       <Card>
-        <DriverTable />
+        <GatekeeperTable />
         <div className=" text-right">
           <Pagination
             current={currentPage}

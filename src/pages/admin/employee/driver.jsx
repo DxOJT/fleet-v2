@@ -7,7 +7,7 @@ import { action, makeAutoObservable } from "mobx";
 import { MyContext } from "../../../context/context";
 
 // graphql
-import { employee } from "../../../graphql/query.cjs";
+import { GET_EMPLOYEES } from "../../../graphql/query.cjs";
 
 // components
 import DriverTable from "../../../components/admin/employee/driverTable";
@@ -55,9 +55,10 @@ const DriverList = () => {
     data: drivers,
     loading: driversLoading,
     refetch,
-  } = useQuery(employee.GET_EMPLOYEES, {
+  } = useQuery(GET_EMPLOYEES, {
     variables: {
       orderBy: { first_name: "asc" },
+      where: { employee_type: { _eq: "driver" } },
       limit: currentPageSize,
       offset: currentPage * currentPageSize - currentPageSize,
     },
@@ -69,6 +70,7 @@ const DriverList = () => {
     setCurrentPage(page);
     refetch({
       orderBy: { first_name: "asc" },
+      where: { employee_type: { _eq: "driver" } },
       limit: pageSize,
       offset: page * pageSize - pageSize,
     });

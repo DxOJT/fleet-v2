@@ -25,7 +25,7 @@ import { displayFulllName } from "../../../helper/name.cjs";
 import List from "../../etc/list.jsx";
 import DriverModal from "./DriverModal.jsx";
 import { useQuery } from "@apollo/client";
-import { GET_USER } from "../../../graphql/CheckUserQuery.js";
+import { GET_USER } from "../../../graphql/query.cjs";
 
 const DriverTable = () => {
   const { driverData, tableLoading, onViewButton } = useContext(MyContext);

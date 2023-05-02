@@ -5,7 +5,7 @@ import { Modal, Input, Form, Button, message } from "antd";
 
 //graphql
 
-import { CREATE_USER_ACC } from "../../../graphql/CreateUserQuery.cjs";
+import { CREATE_USER_ACC } from "../../../graphql/mutation.cjs";
 import { useMutation } from "@apollo/client";
 
 function DriverModal({ modalIdOpen, setModalIdOpen, refetch }) {

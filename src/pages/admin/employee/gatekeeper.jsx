@@ -7,7 +7,7 @@ import { action, makeAutoObservable } from "mobx";
 import { MyContext } from "../../../context/context";
 
 // graphql
-import { GET_EMPLOYEES } from "../../../graphql/query.cjs";
+import { employee } from "../../../graphql/query.cjs";
 
 // components
 import GatekeeperTable from "../../../components/admin/employee/gatekeeperTable";
@@ -53,11 +53,10 @@ const DriverList = () => {
     data: gatekeepers,
     loading: gatekeepersLoading,
     refetch,
-  } = useQuery(GET_EMPLOYEES, {
+  } = useQuery(employee.GET_EMPLOYEES, {
     variables: {
       orderBy: { first_name: "asc" },
       limit: currentPageSize,
-      where: { employee_type: { _eq: "gatekeeper" } },
       offset: currentPage * currentPageSize - currentPageSize,
     },
   });
@@ -69,7 +68,6 @@ const DriverList = () => {
     refetch({
       orderBy: { first_name: "asc" },
       limit: pageSize,
-      where: { employee_type: { _eq: "gatekeeper" } },
       offset: page * pageSize - pageSize,
     });
   };
@@ -79,7 +77,6 @@ const DriverList = () => {
     if (gatekeepers && !gatekeepersLoading) {
       setTotalItems(gatekeepers.employee_aggregate.aggregate.count);
       store.setGatekeeper(gatekeepers.employee);
-      console.log(gatekeepers.employee);
     }
   }, [gatekeepers]);
   useEffect(() => {

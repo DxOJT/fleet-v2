@@ -1,6 +1,6 @@
 import { Button, Card, Typography, Form } from "antd";
 import UploadProfile from "../../../components/admin/employee/addDriver/uploadProfile";
-import { ADD_EMPLOYEE } from "../../../graphql/mutation.cjs";
+import { add_employee } from "../../../graphql/mutation.cjs";
 import { useMutation } from "@apollo/client";
 import moment from "moment";
 import { useState } from "react";
@@ -10,7 +10,9 @@ const AddDriver = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [imageToView, setImageToView] = useState(null);
-  const [addEmployee, { data, loading, error }] = useMutation(ADD_EMPLOYEE);
+  const [addEmployee, { data, loading, error }] = useMutation(
+    add_employee.ADD_EMPLOYEE
+  );
 
   const styles = {
     title: {

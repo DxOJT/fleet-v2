@@ -7,7 +7,7 @@ import { action, makeAutoObservable, toJS } from "mobx";
 import { MyContext } from "../../../context/context";
 
 // graphql
-import { GET_EMPLOYEES } from "../../../graphql/query.cjs";
+import { employee } from "../../../graphql/query.cjs";
 
 // components
 import DriverTable from "../../../components/admin/employee/driverTable";
@@ -39,10 +39,9 @@ class DriverListStore {
   }
 
   onViewButton(id) {
-    return () => {};
-  }
-  setModalIdOpen(id) {
-    return () => {};
+    return () => {
+      console.log(id);
+    };
   }
 }
 const store = new DriverListStore();
@@ -55,10 +54,9 @@ const DriverList = () => {
     data: drivers,
     loading: driversLoading,
     refetch,
-  } = useQuery(GET_EMPLOYEES, {
+  } = useQuery(employee.GET_EMPLOYEES, {
     variables: {
       orderBy: { first_name: "asc" },
-      where: { employee_type: { _eq: "driver" } },
       limit: currentPageSize,
       offset: currentPage * currentPageSize - currentPageSize,
     },
@@ -70,7 +68,6 @@ const DriverList = () => {
     setCurrentPage(page);
     refetch({
       orderBy: { first_name: "asc" },
-      where: { employee_type: { _eq: "driver" } },
       limit: pageSize,
       offset: page * pageSize - pageSize,
     });

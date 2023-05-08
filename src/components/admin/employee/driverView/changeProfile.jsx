@@ -1,9 +1,7 @@
-import { Form, Upload, Modal } from "antd";
-import { useState } from "react";
+import { Form, Upload, Image } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 const ChangeProfile = ({ imageToView, setImageToView }) => {
-  const [viewPhoto, setViewPhoto] = useState(false);
-
+  console.log("Here");
   //upload form item rules
   const rules = [
     () => ({
@@ -61,19 +59,8 @@ const ChangeProfile = ({ imageToView, setImageToView }) => {
     setImageToView(null);
   };
 
-  //toggle modal to view image
-  const togglePhotoModal = () => {
-    setViewPhoto(!viewPhoto);
-  };
   return (
     <>
-      <Modal open={viewPhoto} onCancel={togglePhotoModal} footer={null}>
-        <img
-          alt="Profile Picture"
-          style={{ width: "100%" }}
-          src={imageToView}
-        />
-      </Modal>
       <Form.Item
         name="photo"
         label="Profile Photo"
@@ -86,7 +73,6 @@ const ChangeProfile = ({ imageToView, setImageToView }) => {
           className="avatar-uploader"
           showUploadList={false}
           accept="image/png, image/jpeg"
-          onPreview={togglePhotoModal}
           maxCount={1}
           customRequest={profilePhotoRequest}
           onRemove={profilePhotoOnRemove}
@@ -94,7 +80,7 @@ const ChangeProfile = ({ imageToView, setImageToView }) => {
           {!imageToView ? (
             uploadButton
           ) : (
-            <img alt="profile" src={imageToView} className=" w-full" />
+            <Image alt="profile" src={imageToView} />
           )}
         </Upload>
       </Form.Item>

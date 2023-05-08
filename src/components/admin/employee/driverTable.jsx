@@ -1,7 +1,9 @@
 import { useContext } from "react";
 
 // third party libraries
-import { Button, Table } from "antd";
+import { Tooltip, Table } from "antd";
+import { BsBoxArrowUpRight } from "react-icons/bs";
+import { FiUserPlus } from "react-icons/fi";
 import Typography from "antd/es/typography/Typography.js";
 import { observer } from "mobx-react";
 import moment from "moment";
@@ -46,16 +48,31 @@ const DriverTable = () => {
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Button
-          type="link"
-          onClick={() =>
-            navigate("/admin/driver-view-details", {
-              state: { ...toJS(record) },
-            })
-          }
-        >
-          View Details
-        </Button>
+        <div className="flex gap-8 ">
+          <Tooltip
+            title={() => <div className=" text-gray-900">View details</div>}
+            color="#ffcc84"
+          >
+            <BsBoxArrowUpRight
+              fontSize={20}
+              color="#Ce7936"
+              type="link"
+              onClick={() =>
+                navigate("/admin/driver-view-details", {
+                  state: { ...toJS(record) },
+                })
+              }
+            />
+          </Tooltip>
+          <Tooltip
+            title={() => (
+              <div className=" text-gray-900">Create New Account</div>
+            )}
+            color="#ffcc84"
+          >
+            <FiUserPlus fontSize={20} color="#Ce7936" />
+          </Tooltip>
+        </div>
       ),
     },
   ];

@@ -1,24 +1,12 @@
-import {
-  Button,
-  Card,
-  Typography,
-  Divider,
-  Form,
-  Input,
-  DatePicker,
-  Select,
-  Radio,
-  Upload,
-  InputNumber,
-} from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Button, Form } from "antd";
 import { update_employee } from "../../../graphql/mutation.cjs";
 import { useMutation } from "@apollo/client";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import ChangeProfile from "../../../components/admin/employee/driverView/changeProfile";
+
 import DriverFormLayout from "../../../components/admin/employee/formLayout/driverFormLayout.jsx";
+import ChangeProfile from "../../../components/admin/employee/driverView/changeProfile.jsx";
 const DriverViewDetails = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
@@ -82,25 +70,22 @@ const DriverViewDetails = () => {
     />
   );
   return (
-    <Form
-      onFinish={updateDriver}
+    <DriverFormLayout
+      uploadPhotoForm={changeProfile}
+      mutationFunction={updateDriver}
       form={form}
-      labelWrap={true}
-      labelCol={{ span: 8 }}
     >
-      <DriverFormLayout uploadPhotoForm={changeProfile}>
-        {
-          <div className=" flex gap-4">
-            <Button type="primary" ghost htmlType="submit">
-              Save
-            </Button>
-            <Button type="primary" ghost>
-              Edit Credentials
-            </Button>
-          </div>
-        }
-      </DriverFormLayout>
-    </Form>
+      {
+        <div className=" flex gap-4">
+          <Button type="primary" ghost htmlType="submit">
+            Save
+          </Button>
+          <Button type="primary" ghost>
+            Edit Credentials
+          </Button>
+        </div>
+      }
+    </DriverFormLayout>
   );
 };
 

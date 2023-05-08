@@ -1,7 +1,7 @@
 import { Form, Upload, Modal } from "antd";
 import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-const UploadProfile = ({ imageToView, setImageToView }) => {
+const UploadProfile = ({ form, imageToView, setImageToView }) => {
   const [viewPhoto, setViewPhoto] = useState(false);
 
   //upload form item rules

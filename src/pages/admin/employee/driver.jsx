@@ -78,6 +78,7 @@ const DriverList = () => {
     if (drivers && !driversLoading) {
       setTotalItems(drivers.employee_aggregate.aggregate.count);
       store.setDrivers(drivers.employee);
+      refetch();
     }
   }, [drivers]);
   useEffect(() => {

@@ -6,7 +6,7 @@ import moment from "moment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DriverFormLayout from "../../../components/admin/employee/addDriver/driverFormLayout";
-import { getS3PublicUrl } from "../../../helper/getS3PublicUrl";
+import { getS3PublicUrl } from "../../../helper/getS3PublicUrl.cjs";
 const AddDriver = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();

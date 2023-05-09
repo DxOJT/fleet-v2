@@ -6,6 +6,7 @@ import moment from "moment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DriverFormLayout from "../../../components/admin/employee/addDriver/driverFormLayout";
+import { getS3PublicUrl } from "../../../helper/getS3PublicUrl";
 const AddDriver = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
@@ -19,10 +20,15 @@ const AddDriver = () => {
   };
 
   //to insert new employee (onFinish of the form)
-  const submitDriver = (values) => {
+  const submitDriver = async (values) => {
+    const photo = await getS3PublicUrl(values.photo.file.originFileObj);
+    const attachment = await getS3PublicUrl(
+      values.licence_attachment.file.originFileObj
+    );
     addEmployee({
       variables: {
         licence_expiration: moment(values.expiration_date),
+        licence_attachment: attachment,
         civil_status: values.civil_status,
         email: values.email,
         first_name: values.first_name,
@@ -31,7 +37,7 @@ const AddDriver = () => {
         licence_number: values.license_number,
         middle_name: values.middle_name,
         mobile_no: values.mobile_number,
-        profile_pic: imageToView,
+        profile_pic: photo,
         religion: values.religion,
         telephone: values.telephone_number,
         weight: values.weight?.toString(),

@@ -44,3 +44,13 @@ export const employee = {
     }
   `,
 };
+
+export const GET_USER = gql`
+  query GetUser {
+    user {
+      id
+      employee_id
+      email
+    }
+  }
+`;

@@ -2,6 +2,7 @@
 import { Button, Card, Input, Typography, Pagination } from "antd";
 import { useQuery } from "@apollo/client";
 import { action, makeAutoObservable } from "mobx";
+import { Link } from "react-router-dom";
 
 // context
 import { MyContext } from "../../../context/context";
@@ -106,9 +107,11 @@ const DriverList = () => {
               className="lg:w-40 my-5 lg:mr-5 lg:my-0"
               placeholder="Search"
             />
-            <Button className="w-full lg:w-auto" type="primary" ghost>
-              Add Gatekeeper
-            </Button>
+            <Link to={"/admin/add-gatekeeper"}>
+              <Button className="w-full lg:w-auto" type="primary" ghost>
+                Add Gatekeeper
+              </Button>
+            </Link>
           </div>
         </div>
       </Card>

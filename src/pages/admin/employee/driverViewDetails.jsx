@@ -7,11 +7,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import DriverFormLayout from "../../../components/admin/employee/formLayout/driverFormLayout.jsx";
 import ChangeProfile from "../../../components/admin/employee/driverView/changeProfile.jsx";
+import { toJS } from "mobx";
+import EditUserModal from "../../../components/admin/employee/EditUserModal.jsx";
 const DriverViewDetails = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const location = useLocation();
   let data = location.state;
+
   const [imageToView, setImageToView] = useState(data?.profile_pic);
   useEffect(() => {
     if (location?.state) {
@@ -69,23 +72,41 @@ const DriverViewDetails = () => {
       imageToView={imageToView}
     />
   );
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
+
   return (
-    <DriverFormLayout
-      uploadPhotoForm={changeProfile}
-      mutationFunction={updateDriver}
-      form={form}
-    >
-      {
-        <div className=" flex gap-4">
-          <Button type="primary" ghost htmlType="submit">
-            Save
-          </Button>
-          <Button type="primary" ghost>
-            Edit Credentials
-          </Button>
-        </div>
-      }
-    </DriverFormLayout>
+    <>
+      <DriverFormLayout
+        uploadPhotoForm={changeProfile}
+        mutationFunction={updateDriver}
+        form={form}
+      >
+        {
+          <div className=" flex gap-4">
+            <Button type="primary" ghost htmlType="submit">
+              Save
+            </Button>
+            <Button type="primary" ghost onClick={handleOpenModal}>
+              Edit Credentials
+            </Button>
+          </div>
+        }
+        <EditUserModal
+          visible={modalVisible}
+          onClose={handleCloseModal}
+          data={data}
+        />
+      </DriverFormLayout>
+    </>
   );
 };
 

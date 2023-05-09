@@ -6,7 +6,8 @@ import moment from "moment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DriverFormLayout from "../../../components/admin/employee/addDriver/driverFormLayout";
-const AddDriver = () => {
+import GatekeeperFormLayout from "../../../components/admin/employee/AddGatekeeper/gatekeeperFormLayout";
+const AddGatekeeper = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [imageToView, setImageToView] = useState(null);
@@ -21,7 +22,7 @@ const AddDriver = () => {
   };
 
   //to insert new employee (onFinish of the form)
-  const submitDriver = (values) => {
+  const addGatekeeper = (values) => {
     addEmployee({
       variables: {
         civil_status: values.civil_status,
@@ -38,7 +39,9 @@ const AddDriver = () => {
         employee_type: values.employee_type,
         gender: values.gender,
       },
-    }).then(() => navigate("/admin/driver-list"));
+    }).then(() => navigate("/admin/gatekeeper-list"));
+
+    console.log(values);
   };
 
   const topCard = (
@@ -73,13 +76,13 @@ const AddDriver = () => {
     />
   );
   return (
-    <DriverFormLayout
+    <GatekeeperFormLayout
       uploadPhotoForm={uploadPhoto}
-      mutationFunction={submitDriver}
+      mutationFunction={addGatekeeper}
       form={form}
       topCard={topCard}
     />
   );
 };
 
-export default AddDriver;
+export default AddGatekeeper;

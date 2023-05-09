@@ -63,6 +63,7 @@ const AddDriver = () => {
             type="primary"
             ghost
             htmlType="submit"
+            loading={loading}
           >
             Save
           </Button>

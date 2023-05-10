@@ -1,7 +1,5 @@
 import React from "react";
 import { Button, Modal, Form, Input, message } from "antd";
-import { useContext } from "react";
-import { MyContext } from "../../../context/context";
 import { toJS } from "mobx";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_USER } from "../../../graphql/query.cjs";

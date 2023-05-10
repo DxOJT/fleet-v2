@@ -2,10 +2,8 @@ import { Button, Card, Typography, Form } from "antd";
 import UploadProfile from "../../../components/admin/employee/addDriver/uploadProfile";
 import { add_employee } from "../../../graphql/mutation.cjs";
 import { useMutation } from "@apollo/client";
-import moment from "moment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DriverFormLayout from "../../../components/admin/employee/addDriver/driverFormLayout";
 import GatekeeperFormLayout from "../../../components/admin/employee/AddGatekeeper/gatekeeperFormLayout";
 const AddGatekeeper = () => {
   const [form] = Form.useForm();

@@ -4,7 +4,7 @@ import DriverList from "../pages/admin/employee/driver";
 import GatekeeperList from "../pages/admin/employee/gatekeeper";
 import AddDriver from "../pages/admin/employee/addDriver";
 import DriverViewDetails from "../pages/admin/employee/driverViewDetails";
-
+import AddGatekeeper from "../pages/admin/employee/addGatekeeper";
 export default [
   {
     path: "/admin",
@@ -17,6 +17,11 @@ export default [
   {
     path: "/admin/gatekeeper-list",
     element: <GatekeeperList />,
+  },
+
+  {
+    path: "/admin/add-gatekeeper",
+    element: <AddGatekeeper />,
   },
   {
     path: "/admin/add-driver",

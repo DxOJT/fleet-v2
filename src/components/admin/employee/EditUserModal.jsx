@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Modal, Form, Input, message } from "antd";
-import { toJS } from "mobx";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_USER } from "../../../graphql/query.cjs";
 import { update_user } from "../../../graphql/mutation.cjs";
@@ -48,29 +47,16 @@ const EditUserModal = ({ visible, onClose, data }) => {
     return Promise.resolve();
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const handleRefetch = () => {
-    refetch();
-  };
-
   const onFinish = (value) => {
     message.success("Created User Account Succesfully");
 
     updateUser({
       variables: {
-        id: !LoadingUser && filteredID[0]?.id,
-        set: { email: value.email, password: value.password },
+        userId: !LoadingUser && filteredID[0]?.id,
+        password: value.password,
       },
-    }).then(() => {
-      handleCancel();
-
-      handleRefetch();
-    });
+    }).then(() => {});
   };
-
-  console.log(toJS(filteredID));
 
   return (
     <Modal
@@ -157,6 +143,7 @@ const EditUserModal = ({ visible, onClose, data }) => {
         <div className=" flex  justify-end gap-3">
           <Button onClick={onClose}>Cancel</Button>
           <Button
+            onClick={onClose}
             htmlType="submit"
             className=" border-orange-600 border-1 text-orange-600"
           >

@@ -169,12 +169,9 @@ export const CREATE_USER_ACC = gql`
 
 export const update_user = {
   UPDATE_USER: gql`
-    mutation updateUser($set: user_set_input, $id: uuid!) {
-      updateUser(id: { id: $id }, _set: $set) {
-        email
-        password
-        employee_id
-        id
+    mutation updateUser($password: String!, $userId: String!) {
+      updateUser(userId: $userId, password: $password) {
+        userId
       }
     }
   `,

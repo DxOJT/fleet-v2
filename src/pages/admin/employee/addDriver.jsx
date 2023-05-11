@@ -1,19 +1,16 @@
 import { Button, Card, Typography, Form } from "antd";
 import UploadProfile from "../../../components/admin/employee/addDriver/uploadProfile";
-import { add_employee } from "../../../graphql/mutation.cjs";
+import { ADD_EMPLOYEE } from "../../../graphql/mutation.cjs";
 import { useMutation } from "@apollo/client";
 import moment from "moment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DriverFormLayout from "../../../components/admin/employee/addDriver/driverFormLayout";
-import { getS3PublicUrl } from "../../../helper/getS3PublicUrl.cjs";
 const AddDriver = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [imageToView, setImageToView] = useState(null);
-  const [addEmployee, { data, loading, error }] = useMutation(
-    add_employee.ADD_EMPLOYEE
-  );
+  const [addEmployee, { data, loading, error }] = useMutation(ADD_EMPLOYEE);
 
   const styles = {
     title: {
@@ -22,21 +19,19 @@ const AddDriver = () => {
   };
 
   //to insert new employee (onFinish of the form)
-  const submitDriver = async (values) => {
-    const photo = await getS3PublicUrl(values.photo.file.originFileObj);
-    const attachment = await getS3PublicUrl(
-      values.licence_attachment.file.originFileObj
-    );
+  const submitDriver = (values) => {
     addEmployee({
       variables: {
+        licence_expiration: moment(values.expiration_date),
         civil_status: values.civil_status,
         email: values.email,
         first_name: values.first_name,
         height: values.height?.toString(),
         last_name: values.last_name,
+        licence_number: values.license_number,
         middle_name: values.middle_name,
         mobile_no: values.mobile_number,
-        profile_pic: photo,
+        profile_pic: imageToView,
         religion: values.religion,
         telephone: values.telephone_number,
         weight: values.weight?.toString(),
@@ -62,7 +57,6 @@ const AddDriver = () => {
             type="primary"
             ghost
             htmlType="submit"
-            loading={loading}
           >
             Save
           </Button>
@@ -83,7 +77,6 @@ const AddDriver = () => {
       uploadPhotoForm={uploadPhoto}
       mutationFunction={submitDriver}
       form={form}
-      topCard={topCard}
     />
   );
 };

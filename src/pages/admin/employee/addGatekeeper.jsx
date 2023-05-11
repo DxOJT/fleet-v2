@@ -37,7 +37,8 @@ const AddGatekeeper = () => {
         employee_type: values.employee_type,
         gender: values.gender,
       },
-    }).then(() => navigate("/admin/gatekeeper-list"));
+    });
+    navigate("/admin/gatekeeper-list");
 
     console.log(values);
   };
@@ -50,7 +51,7 @@ const AddGatekeeper = () => {
           level={4}
           style={{ margin: 0, ...styles.title }}
         >
-          Add Driver
+          Add Gatekeeper
         </Typography.Title>
         <div className="block lg:flex items-center">
           <Button

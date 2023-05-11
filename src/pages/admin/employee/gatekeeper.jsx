@@ -78,6 +78,7 @@ const DriverList = () => {
     if (gatekeepers && !gatekeepersLoading) {
       setTotalItems(gatekeepers.employee_aggregate.aggregate.count);
       store.setGatekeeper(gatekeepers.employee);
+      refetch();
     }
   }, [gatekeepers]);
   useEffect(() => {
@@ -111,6 +112,7 @@ const DriverList = () => {
               <Button className="w-full lg:w-auto" type="primary" ghost>
                 Add Gatekeeper
               </Button>
+              x
             </Link>
           </div>
         </div>

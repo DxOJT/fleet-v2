@@ -45,7 +45,7 @@ class GatekeeperListStore {
 }
 const store = new GatekeeperListStore();
 
-const DriverList = () => {
+const GatekeeperList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPageSize, setCurrentPageSize] = useState(20);
   const [totalItems, setTotalItems] = useState();
@@ -133,4 +133,4 @@ const DriverList = () => {
   );
 };
 
-export default DriverList;
+export default GatekeeperList;

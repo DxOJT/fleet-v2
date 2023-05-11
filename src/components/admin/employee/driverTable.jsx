@@ -41,6 +41,16 @@ const DriverTable = () => {
           {displayFulllName(record.first_name, "", record.last_name)}
         </Typography.Text>
       ),
+      filters: [],
+      onFilter: (value, record) =>
+        record.first_name.indexOf(value) === 0 ||
+        record.last_name.indexOf(value) === 0,
+      sorter: (a, b) =>
+        a.first_name.length +
+        a.last_name.length -
+        b.first_name.length -
+        b.last_name.length,
+      sortDirections: ["descend"],
     },
     {
       title: "	LICENSE EXPIRY",
@@ -53,6 +63,15 @@ const DriverTable = () => {
           )}
         </Typography.Text>
       ),
+      filters: [],
+      onFilter: (value, record) =>
+        moment(record.licence_expiration)
+          .format("YYYY-MM-DD")
+          .indexOf(value) === 0,
+      sorter: (a, b) =>
+        moment(a.licence_expiration).valueOf() -
+        moment(b.licence_expiration).valueOf(),
+      sortDirections: ["descend"],
     },
     {
       title: "Action",
@@ -65,13 +84,13 @@ const DriverTable = () => {
           DataUser.user.filter((id) => id.employee_id === employeeID);
 
         return (
-          <div className=" flex gap-2 text-orange-500">
+          <div className=" flex gap-5 text-orange-500">
             <Tooltip
               title={() => <div className="text-black">View Details</div>}
-              color={"#Ce7936"}
+              color="#ffcc84"
             >
               <BsBoxArrowUpRight
-                className=" mt-1"
+                fontSize={20}
                 onClick={onViewButton(record.id)}
               />
             </Tooltip>
@@ -79,9 +98,10 @@ const DriverTable = () => {
               title={() => (
                 <div className=" text-black">Create User Account</div>
               )}
-              color={"#Ce7936"}
+              color="#ffcc84"
             >
               <FiUserPlus
+                fontSize={20}
                 visibility={filteredId[0]?.id ? " hidden" : "visible"}
                 onClick={() => setModalIdOpen(record.id)}
               />

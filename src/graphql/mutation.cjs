@@ -74,7 +74,6 @@ export const CREATE_USER_ACC = gql`
       employee_id: $employee_id
     ) {
       email
-      password
     }
   }
 `;

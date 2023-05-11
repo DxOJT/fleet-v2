@@ -77,7 +77,6 @@ const AddDriver = () => {
       uploadPhotoForm={uploadPhoto}
       mutationFunction={submitDriver}
       form={form}
-      topCard={topCard}
     />
   );
 };

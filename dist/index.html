@@ -2,15 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fleet Taxi</title>
     <script type="module" crossorigin src="/assets/index-7de6a32e.js"></script>
-    <link rel="stylesheet" href="/assets/index-e12fada6.css">
+    <link rel="stylesheet" href="/assets/index-e12fada6.css" />
   </head>
   <body>
     <div id="root"></div>
-    
+
+    <script>
+      /**
+       * this is a hack for dragula
+       * error: global is not defined
+       */
+      var global = global || window;
+    </script>
   </body>
 </html>

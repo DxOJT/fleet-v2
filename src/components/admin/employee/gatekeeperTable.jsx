@@ -1,46 +1,36 @@
 import { useContext, useState } from "react";
-
-// third party libraries
-
-import { Table, Tooltip } from "antd";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import { FiUserPlus } from "react-icons/fi";
+// third party libraries
+import { Button, Table, Tooltip } from "antd";
 import Typography from "antd/es/typography/Typography.js";
+import { observer } from "mobx-react";
 import moment from "moment";
 
 // context
-
 import { MyContext } from "../../../context/context.jsx";
 
-//mobx
-
-import { observer } from "mobx-react";
-
 // helpers
-
 import { displayFulllName } from "../../../helper/name.cjs";
+import GatekeeperModal from "./GatekeeperModal.jsx";
 
-// components
-
-import List from "../../etc/list.jsx";
-import DriverModal from "./DriverModal.jsx";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../../../graphql/query.cjs";
-
-const DriverTable = () => {
-  const { driverData, tableLoading, onViewButton } = useContext(MyContext);
+const GatekeeperTable = () => {
+  const { gatekeeperData, tableLoading } = useContext(MyContext);
   const [modalIdOpen, setModalIdOpen] = useState(null);
   const { loading: LoadingUser, data: DataUser, refetch } = useQuery(GET_USER);
-
   const columns = [
     {
       title: "Name",
-      key: "name",
+      dataIndex: "name",
+
       render: (_, record) => (
         <Typography.Text className="capitalize">
           {displayFulllName(record.first_name, "", record.last_name)}
         </Typography.Text>
       ),
+
       filters: [],
       onFilter: (value, record) =>
         record.first_name.indexOf(value) === 0 ||
@@ -53,27 +43,6 @@ const DriverTable = () => {
       sortDirections: ["descend"],
     },
     {
-      title: "	LICENSE EXPIRY",
-      dataIndex: "licence_expiration",
-      key: "licence_expiration",
-      render: (text) => (
-        <Typography.Text>
-          {moment(new Date(text)).format(
-            import.meta.env.VITE_DATE_DISPLAY_FORMAT
-          )}
-        </Typography.Text>
-      ),
-      filters: [],
-      onFilter: (value, record) =>
-        moment(record.licence_expiration)
-          .format("YYYY-MM-DD")
-          .indexOf(value) === 0,
-      sorter: (a, b) =>
-        moment(a.licence_expiration).valueOf() -
-        moment(b.licence_expiration).valueOf(),
-      sortDirections: ["descend"],
-    },
-    {
       title: "Action",
       key: "action",
       render: (_, record) => {
@@ -82,26 +51,23 @@ const DriverTable = () => {
         const filteredId =
           !LoadingUser &&
           DataUser.user.filter((id) => id.employee_id === employeeID);
-
         return (
-          <div className=" flex gap-5 text-orange-500">
+          <div className="flex gap-8 ">
             <Tooltip
-              title={() => <div className="text-black">View Details</div>}
+              title={() => <div className=" text-gray-900">View details</div>}
               color="#ffcc84"
             >
-              <BsBoxArrowUpRight
-                fontSize={20}
-                onClick={onViewButton(record.id)}
-              />
+              <BsBoxArrowUpRight fontSize={20} color="#Ce7936" />
             </Tooltip>
             <Tooltip
               title={() => (
-                <div className=" text-black">Create User Account</div>
+                <div className=" text-gray-900">Create New Account</div>
               )}
               color="#ffcc84"
             >
               <FiUserPlus
                 fontSize={20}
+                color="#Ce7936"
                 visibility={filteredId[0]?.id ? " hidden" : "visible"}
                 onClick={() => setModalIdOpen(record.id)}
               />
@@ -111,37 +77,16 @@ const DriverTable = () => {
       },
     },
   ];
-  const listRender = (record) => (
-    <>
-      <Typography.Paragraph strong className="capitalize">
-        Name: {displayFulllName(record.first_name, "", record.last_name)}
-      </Typography.Paragraph>
-      <Typography.Text>
-        Licence expiry:
-        {moment(new Date(record.licence_expiration)).format(
-          import.meta.env.VITE_DATE_DISPLAY_FORMAT
-        )}
-      </Typography.Text>
-    </>
-  );
   return (
     <>
       <Table
         loading={tableLoading}
         className="lg:block hidden mb-5"
         columns={columns}
-        dataSource={driverData}
+        dataSource={gatekeeperData}
         pagination={false}
       />
-
-      <List
-        loading={tableLoading}
-        className="lg:hidden block"
-        data={driverData}
-        onViewClick={onViewButton}
-        render={listRender}
-      />
-      <DriverModal
+      <GatekeeperModal
         key={modalIdOpen}
         modalIdOpen={modalIdOpen}
         setModalIdOpen={setModalIdOpen}
@@ -151,4 +96,4 @@ const DriverTable = () => {
   );
 };
 
-export default observer(DriverTable);
+export default observer(GatekeeperTable);

@@ -17,6 +17,7 @@ export const ADD_EMPLOYEE = gql`
     $weight: String
     $employee_type: String
     $gender: String
+    $licence_attachment: String
   ) {
     insert_employee(
       objects: {
@@ -35,6 +36,7 @@ export const ADD_EMPLOYEE = gql`
         weight: $weight
         employee_type: $employee_type
         gender: $gender
+        licence_attachment: $licence_attachment
       }
     ) {
       affected_rows
@@ -55,6 +57,7 @@ export const ADD_EMPLOYEE = gql`
         id
         employee_type
         gender
+        licence_attachment
       }
     }
   }
